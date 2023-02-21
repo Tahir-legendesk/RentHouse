@@ -7,6 +7,8 @@ use App\Booking;
 use App\House;
 use App\User;
 use Illuminate\Http\Request;
+use App\Subscribe;
+use App\Contact;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -31,6 +33,15 @@ class HomeController extends Controller
         $houses = House::where('status', 1)->latest()->paginate(6);
         $areas = Area::all();
         return view('welcome', compact('houses', 'areas'));
+    }
+
+    public function subscribe(Request $request){
+        $subscribe = new Subscribe;
+        $subscribe->email = $request->email;
+        $subscribe->save();
+        return response()->json([
+            'message' => 'success'
+        ]);
     }
 
     public function highToLow()
@@ -155,8 +166,15 @@ class HomeController extends Controller
         return view('contact-us');
     }
 
-    public function contactUs(){
-        
+    public function contactUs(Request $request){
+
+        $contact = new Contact;
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->phone = $request->phone;
+        $contact->message = $request->message;
+        $contact->save();
+        return redirect()->back()->with('message','Thanks for contacting us. we\'ll reach you as soon as possible.');
     }
 
 }

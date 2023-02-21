@@ -26,14 +26,18 @@
                     <div class="col-md-6 wow fadeInUp" data-wow-delay="0.25s">
                         <div class="cont_2">
                             <div class="section_head">
-                                <h2>Contact Us</h2>
+                                <h2>Contact Us</h2><br>
+                                @if (session('message'))
+                                    <div class="alert alert-success">{{ session('message') }}</div>
+                                @endif
                             </div>
                             <div class="form_style">
-                                <form action="{{route('contact')}}" method="post">
-                                    <input type="text" placeholder="Name">
-                                    <input type="email" placeholder="Email">
-                                    <input type="tel" placeholder="Phone">
-                                    <textarea placeholder="Type your message here"></textarea>
+                                <form action="{{ route('contact') }}" method="post">
+                                    @csrf
+                                    <input type="text" name="name" placeholder="Name">
+                                    <input type="email" name="email" placeholder="Email">
+                                    <input type="tel" name="phone" placeholder="Phone">
+                                    <textarea name="message" placeholder="Type your message here"></textarea>
                                     <input type="submit" value="Submit">
                                 </form>
                             </div>
@@ -42,7 +46,5 @@
                 </div>
             </div>
         </section>
-
-
     </main>
 @endsection

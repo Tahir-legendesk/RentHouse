@@ -14,8 +14,9 @@
 Route::get('/', 'HomeController@index')->name('welcome');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/atv-rental', 'HomeController@atvRental')->name('atv-rental');
-Route::get('/contact-us', 'HomeController@contact')->name('contact');
-Route::post('/contact', 'HomeController@contactUs')->name('contact-us');
+Route::get('/contact-us', 'HomeController@contact')->name('contact-us');
+Route::post('/contact', 'HomeController@contactUs')->name('contact');
+Route::post('/subscribe', 'HomeController@subscribe')->name('subscribe');
 
 
 
