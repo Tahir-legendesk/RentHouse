@@ -20,6 +20,9 @@
                 <div class="col-md-7">
                     <div class="property_imgs">
                         <div class="row g-3">
+                            <div class="col-12">
+                                <a href="{{ asset('storage/featured_house/' . $house->featured_image) }}" data-fancybox="prop_imgs"><img src="{{ asset('storage/featured_house/' . $house->featured_image) }}" alt="" class="img-fluid"></a>
+                            </div>
                             @php
                                 $count = 1;
                                 $all_images = json_decode($house->images);
@@ -33,12 +36,12 @@
                                 @endphp 
                                 @if($count_2 == 1)
                                     <div class="col-12">
-                                        <a href="{{ asset('storage/featured_house/' . $item) }}" data-fancybox="prop_imgs"><img src="{{ asset('storage/featured_house/' . $item) }}" alt="" class="img-fluid"></a>
+                                        <a href="{{ asset('images/' . $item) }}" data-fancybox="prop_imgs"><img src="{{ asset('images/' . $item) }}" alt="" class="img-fluid"></a>
                                     </div>
                                 @endif
                                 @if($count_2 > 1 && $count_2 < 6)
                                     <div class="col-6">
-                                        <a href="{{ asset('storage/featured_house/' . $item) }}" data-fancybox="prop_imgs"><img src="{{ asset('storage/featured_house/' . $item) }}" alt="" class="img-fluid"></a>
+                                        <a href="{{ asset('images/' . $item) }}" data-fancybox="prop_imgs"><img src="{{ asset('images/' . $item) }}" alt="" class="img-fluid"></a>
                                     </div>
                                 @endif
                                 @if($count_2 >= 5)
@@ -59,7 +62,7 @@
                                 <p>{{$house->user->name}}</p>
                                 <div class="ag_contact">
                                     <i class="fas fa-phone"></i>
-                                    <a href="tel:(603) 555-0123">{{$house->user->contact}}</a>
+                                    <a href="#">{{$house->user->contact}}</a>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +74,7 @@
                             </div>
                             <div class="prod_txt">
                                 <div class="prod_pricing">$ {{$house->rent}} <small>per month</small></div>
-                                <h3><a href="house-details.php">Apartment MBS</a></h3>
+                                <h3><a href="#">{{$house->name}}</a></h3>
                                 <p>{{$house->address}}</p>
                                 <ul>
                                     <li>
@@ -84,7 +87,7 @@
                                     </li>
                                     <li>
                                         <i class="fas fa-square-full me-2"></i>
-                                        726sqft
+                                        {{$house->dimension}} sqft
                                     </li>
                                 </ul>
                             </div>
@@ -121,10 +124,11 @@
                                         <li>Full bathrooms: {{$house->number_of_toilet}}</li>
                                     </ul>
                                 </li>
+                                {{-- {{dd($house)}} --}}
                                 <li>
                                     Cooling
                                     <ul>
-                                        <li>Cooling features: Other</li>
+                                        <li>Cooling features: {{$house->cooling}}</li>
                                     </ul>
                                 </li>
                             </ul>
@@ -133,13 +137,13 @@
                                 <li>
                                     Property
                                     <ul>
-                                        <li>Exterior features: Cooling System: Air Conditioning, Electricity not included in rent, Owner pays POA dues., Tennis Court(s), Water not included in rent</li>
+                                        <li>{{$house->description}}</li>
                                     </ul>
                                 </li>
                                 <li>
                                     Parking
                                     <ul>
-                                        <li>Parking features: Contact manager</li>
+                                        <li>Parking features: {{$house->parking}}</li>
                                     </ul>
                                 </li>
                             </ul>
@@ -148,7 +152,7 @@
                                 <li>
                                     Type and style
                                     <ul>
-                                        <li>Home type: SingleFamily</li>
+                                        <li>Home type: {{$house->type}}</li>
                                     </ul>
                                 </li>
                             </ul>
@@ -157,14 +161,14 @@
                                 <li>
                                     Community
                                     <ul>
-                                        <li>Community features: Tennis Court(s)</li>
+                                        <li>Community features: {{$house->community_feature}}</li>
                                     </ul>
                                 </li>
                                 <li>
                                     Location
                                     <ul>
 
-                                        <li>Region: Lake Kiowa</li>
+                                        <li>Region: {{$house->area->name}}</li>
                                     </ul>
                                 </li>
                             </ul>
@@ -172,8 +176,8 @@
                             <ul class="col_count_2">
                                 <li>
                                     <ul>
-                                        <li>Appliances included: Dryer, Washer</li>
-                                        <li>Laundry features: In Unit</li>
+                                        <li>Appliances included: {{$house->appliances}}</li>
+                                        <li>Laundry features: {{$house->laundry}}</li>
                                     </ul>
                                 </li>
                             </ul>
@@ -468,13 +472,13 @@
             })
         }
     </script>
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f5fb96836345445"></script>
+    {{-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f5fb96836345445"></script> --}}
     {{-- @endsection --}}
 @endpush
 
 
 
 
-@section('css')
+{{-- @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css">
-@endsection
+@endsection --}}

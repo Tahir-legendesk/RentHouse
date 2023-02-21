@@ -9,7 +9,7 @@
                   <div class="col-8 col-md-10 d-flex justify-content-end align-items-center">
                       <nav class="menuWrap">
                           <ul class="menu">
-                              <li class="active"><a href="../">Home</a></li>
+                              <li class="active"><a href="/">Home</a></li>
                               <li><a href="{{route('about')}}">About Us</a></li>
                               <li><a href="{{route('house-all')}}">Rent</a></li>
                               {{-- <li><a href="agents.php">Agent</a></li> --}}

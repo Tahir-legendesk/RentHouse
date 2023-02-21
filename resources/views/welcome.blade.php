@@ -75,11 +75,14 @@
         <div class="container">
             <div class="s1_0">
                 <form action="{{ route('search') }}" method="GET">
-                    @csrf
+                    {{-- @csrf --}}
                     <div class="row justify-content-center">
                         @if (session('search'))
-                            <div class="alert alert-danger mt-3" id="alert" roles="alert">
+                            <div class="alert alert-danger" id="alert" roles="alert">
                                 {{ session('search') }}
+                                {{-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button> --}}
                             </div>
                         @endif
                     </div>
@@ -88,35 +91,35 @@
                             <div class="input_group">
                                 <span class="icon icon-location" aria-label="Location Icon"></span>
                                 <label for="">Location</label>
-                                <input type="text" placeholder="Anywhere">
+                                <input type="text" name="location" placeholder="Anywhere">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="input_group">
                                 <span class="icon icon-checkin" aria-label="Check in Icon"></span>
                                 <label for="">Check in</label>
-                                <input type="date" placeholder="Add Date">
+                                <input type="date" name="check_in" placeholder="Add Date">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="input_group">
                                 <span class="icon icon-checkout" aria-label="Check Out Icon"></span>
                                 <label for="">Check Out</label>
-                                <input type="date" placeholder="Anywhere">
+                                <input type="date" name="check_out" >
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="input_group">
                                 <span class="icon icon-adults" aria-label="Adults Icon"></span>
                                 <label for="">Adults</label>
-                                <input type="text" value="2">
+                                <input type="text" name="adults" placeholder="4">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="input_group">
                                 <span class="icon icon-children" aria-label="Children Icon"></span>
                                 <label for="">Children</label>
-                                <input type="text" value="0">
+                                <input type="text" name="children" placeholder="2">
                             </div>
                         </div>
                         <div class="col-md-12 text-center">
@@ -320,7 +323,7 @@
                             </div>
                             <div class="prod_txt">
                                 <div class="prod_pricing">$ {{ $house->rent }} <small>per month</small></div>
-                                <h3><a href="{{ route('house.details', $house->id) }}">Apartment MBS</a></h3>
+                                <h3><a href="{{ route('house.details', $house->id) }}">{{ $house->name }}</a></h3>
                                 <p>{{ $house->address }}</p>
                                 <ul>
                                     <li>
@@ -332,7 +335,8 @@
                                         {{ $house->number_of_toilet }} BT
                                     </li>
                                     <li>
-                                        {{ $house->area->name }}
+                                        <i class="fas fa-square-full me-2"></i>
+                                        {{ $house->dimension }} sqft
                                     </li>
                                 </ul>
                             </div>

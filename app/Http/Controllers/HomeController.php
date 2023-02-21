@@ -55,9 +55,9 @@ class HomeController extends Controller
 
     public function allHouses()
     {
-        // $houses = House::latest()->where('status', 1)->paginate(12);
+        $houses = House::latest()->where('status', 1)->get();
         // return view('allHouses', compact('houses'));
-        return view('allHouses');
+        return view('allHouses', get_defined_vars());
 
     }
 
@@ -70,23 +70,42 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {
+        $area = $request->location;
+        $check_in = $request->check_in;
+        $check_out = $request->check_out;
+        $adults = $request->adults;
+        $children = $request->children;
 
-        $room = $request->room;
-        $bathroom = $request->bathroom;
-        $rent = $request->rent;
-        $address = $request->address;
-
-        if ($room == null && $bathroom == null && $rent == null && $address == null) {
-            session()->flash('search', 'Your have to fill up minimum one field for search');
+        $houses = House::where('status', 1);
+        if ($area == null && $check_in == null && $check_out == null && $adults == null && $children == null) {
+            session()->flash('search', 'You have to fill up minimum one field for search');
             return redirect()->back();
         }
 
-        $houses = House::where('rent', 'LIKE', $rent)
-            ->where('number_of_toilet', 'LIKE', $bathroom)
-            ->where('number_of_room', 'LIKE', $room)
-            ->where('address', 'LIKE', "%$address%")
-            ->get();
-        return view('search', compact('houses'));
+        if ($request->location != null) {
+            $houses = $houses->whereHas('area', function ($q) use ($area) {
+                $q->where('name', 'LIKE', "%$area%");
+            });
+        }
+
+        if ($request->check_in != null) {
+            $houses = $houses->whereDate('check_in', '>=', $check_in);
+        }
+
+        if ($request->check_out != null) {
+            $houses = $houses->whereDate('check_out', '<=', $check_out);
+        }
+
+        if ($request->adults != null) {
+            $houses = $houses->where('adults', '>=', $adults);
+        }
+
+        if ($request->children != null) {
+            $houses = $houses->where('children', '>=', $children);
+        }
+
+        $houses = $houses->get();
+        return view('welcome', get_defined_vars());
     }
 
     public function searchByRange(Request $request)
@@ -155,8 +174,9 @@ class HomeController extends Controller
         return view('contact-us');
     }
 
-    public function contactUs(){
-        
+    public function contactUs()
+    {
+
     }
 
 }
