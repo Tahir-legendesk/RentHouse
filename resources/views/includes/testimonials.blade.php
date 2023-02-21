@@ -20,7 +20,7 @@
                             excellent. Some of the best
                             designers in the world.</p>
                         <div class="author">
-                            <img src="../assets/images/c1.png" alt="" class="img-fluid" loading="lazy">
+                            <img src="/assets/images/c1.png" alt="" class="img-fluid" loading="lazy">
                             <p>
                                 <strong>David Adreas</strong>
                                 <span>CEO at Realestatepower</span>
@@ -41,7 +41,7 @@
                             excellent. Some of the best
                             designers in the world.</p>
                         <div class="author">
-                            <img src="../assets/images/c2.png" alt="" class="img-fluid" loading="lazy">
+                            <img src="/assets/images/c2.png" alt="" class="img-fluid" loading="lazy">
                             <p>
                                 <strong>David Adreas</strong>
                                 <span>CEO at Realestatepower</span>
@@ -62,7 +62,7 @@
                             excellent. Some of the best
                             designers in the world.</p>
                         <div class="author">
-                            <img src="../assets/images/c2.png" alt="" class="img-fluid" loading="lazy">
+                            <img src="/assets/images/c2.png" alt="" class="img-fluid" loading="lazy">
                             <p>
                                 <strong>Angela Nasution</strong>
                                 <span>CEO at Realestatepower</span>

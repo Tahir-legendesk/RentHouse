@@ -78,7 +78,7 @@
 
     {{-- </div> --}}
     @include('../includes/scripts')
-    {{-- @stack('custom_script') --}}
+    @stack('custom_script')
 </body>
 
 </html>
