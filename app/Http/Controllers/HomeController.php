@@ -208,9 +208,10 @@ class HomeController extends Controller
         return view('about');
     }
 
-    public function atvRental()
+    public function atvRental($id)
     {
-        $atvs = ATV::where('is_active',1)->get();
+        $atvs = ATV::where('house_id',$id)->where('is_active',1)->get();
+        // dd($atvs);
         return view('atv',get_defined_vars());
     }
 

@@ -6,19 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class House extends Model
 {
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function area(){
+    public function area()
+    {
         return $this->belongsTo(Area::class);
     }
 
-    public function reviews(){
+    public function reviews()
+    {
         return $this->hasMany(Review::class);
     }
 
-    public function inquiries(){
+    public function inquiries()
+    {
         return $this->hasMany(Inquiry::class);
+    }
+
+    public function atvs()
+    {
+        return $this->hasMany(ATV::class);
     }
 }

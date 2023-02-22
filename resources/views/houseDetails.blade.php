@@ -190,6 +190,20 @@
                                         </ul>
                                     </li>
                                 </ul>
+                                {{-- {{ dd($house->atvs) }} --}}
+
+                                <h4>Atv's Available</h4>
+                                <ul class="col_count_2">
+                                    <li>
+                                        <ul>
+                                            @if (count($house->atvs) > 0)
+                                                <li><a href="{{ route('atv-rental', $house->id) }}">Yes</a></li>
+                                            @else
+                                                <li><a href="#">No</a></li>
+                                            @endif
+                                        </ul>
+                                    </li>
+                                </ul>
                                 <div class="map_holder">
                                     <iframe
                                         src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=usa+(My%20Business%20Name)&amp;t=&amp;z=5&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
@@ -500,8 +514,8 @@
 
         $(document).ready(function() {
             $(".alert").fadeTo(4000, 500).slideUp(500, function() {
-                    $(".alert").slideUp(500);
-                });
+                $(".alert").slideUp(500);
+            });
         });
     </script>
     {{-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f5fb96836345445"></script> --}}
