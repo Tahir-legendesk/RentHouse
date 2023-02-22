@@ -9,15 +9,6 @@
                   <div class="col-8 col-md-10 d-flex justify-content-end align-items-center">
                       <nav class="menuWrap">
                           <ul class="menu">
-<<<<<<< HEAD
-                              <li class="active"><a href="../">Home</a></li>
-                              <li><a href="{{ route('about') }}">About Us</a></li>
-                              <li><a href="{{ route('house-all') }}">Rent</a></li>
-                              {{-- <li><a href="agents.php">Agent</a></li> --}}
-                              <li><a href="{{ route('register') }}">Become a Member</a></li>
-                              <li><a href="{{ route('atv-rental') }}">ATV’s rentals</a></li>
-                              <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
-=======
                               <li class="active"><a href="/">Home</a></li>
                               <li><a href="{{route('about')}}">About Us</a></li>
                               <li><a href="{{route('house-all')}}">Rent</a></li>
@@ -25,7 +16,6 @@
                               {{-- <li><a href="{{ route('register') }}">Become a Member</a></li> --}}
                               {{-- <li><a href="{{route('atv-rental')}}">ATV’s rentals</a></li> --}}
                               <li><a href="{{route('contact')}}">Contact Us</a></li>
->>>>>>> 5dc7496d1da61b460b74763efc18782cde63fc1a
                           </ul>
 
                           {{-- <ul class="navbar-nav mr-auto">
@@ -57,26 +47,6 @@
                           {{-- <a class="nav-link" href="{{ route('login') }}">Sign in</a>
                           <a class="nav-link" href="{{ route('register') }}">Signup</a> --}}
 
-<<<<<<< HEAD
-                          <ul class="navbar-nav mr-auto">
-                              @guest
-                                  <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Sign in</a></li>
-                                  <li class="nav-item"> <a class="nav-link" href="{{ route('register') }}">Signup</a></li>
-                              @else
-                                  @if (Auth::user()->role_id == 2)
-                                      <li class="nav-item"><a class="nav-link"
-                                              href="{{ route('landlord.dashboard') }}">Dashboard</a></li>
-                                  @endif
-                                  @if (Auth::user()->role_id == 3)
-                                      <li class="nav-item"><a class="nav-link"
-                                              href="{{ route('renter.dashboard') }}">Dashboard</a></li>
-                                  @endif
-                                  @if (Auth::user()->role_id == 1)
-                                      <li class="nav-item"><a class="nav-link"
-                                              href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                                  @endif
-                              @endguest
-=======
                           <ul class="navbar-nav mr-auto">                 
                             @guest
                             <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
@@ -92,7 +62,6 @@
                             <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                             @endif
                             @endguest
->>>>>>> 5dc7496d1da61b460b74763efc18782cde63fc1a
                           </ul>
                       </div>
                       <div class="menu-Bar">

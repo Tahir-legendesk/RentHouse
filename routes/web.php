@@ -20,6 +20,7 @@ Route::get('/atv-rental', 'HomeController@atvRental')->name('atv-rental');
 Route::get('/contact-us', 'HomeController@contact')->name('contact-us');
 Route::post('/contact', 'HomeController@contactUs')->name('contact');
 Route::post('/subscribe', 'HomeController@subscribe')->name('subscribe');
+Route::get('/filterhouse', 'HomeController@filterhouse')->name('filterhouse');
 
 
 

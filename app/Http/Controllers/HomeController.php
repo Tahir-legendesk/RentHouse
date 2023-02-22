@@ -67,10 +67,41 @@ class HomeController extends Controller
 
     public function allHouses(Request $request)
     {
-        $houses = House::where('status', 1)->paginate(12);
+        $houses = House::where('status', 1);
         // return view('allHouses', compact('houses'));
-        return view('allHouses',get_defined_vars());
+        $area = $request->area;
+        $price = $request->price;
+        $beds = $request->beds;
+        $baths = $request->baths;
+        $sqft = $request->sqft;
+  
+        if ($request->location != null) {
+            $houses = $houses->whereHas('area', function ($q) use ($area) {
+                $q->where('name', 'LIKE', "%$area%");
+            });
+        }
+        if($request->houses){
+            // dd('sss');
+        }
+        
+        if($request->price != null){
+            //  dd(
+            
+        } 
+        
+        if($request->beds){
 
+        }
+
+        if($request->baths){
+
+        }
+
+        if($request->sqft){
+
+        }   
+        $houses = $houses->paginate(12);
+        return view('allHouses',get_defined_vars());
     }
 
     public function areaWiseShow($id)
@@ -196,6 +227,10 @@ class HomeController extends Controller
         $contact->message = $request->message;
         $contact->save();
         return redirect()->back()->with('message','Thanks for contacting us. we\'ll reach you as soon as possible.');
+    }
+
+    public function filterhouse(Request $request){
+        dd($request->all());
     }
 
 }
