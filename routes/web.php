@@ -31,6 +31,8 @@ Route::get('/all-available/houses', 'HomeController@allHouses')->name('house-all
 Route::get('/available-houses/area/{id}', 'HomeController@areaWiseShow')->name('available.area.house');
 
 Route::post('/house-booking/id/{id}', 'HomeController@booking')->name('booking');
+Route::post('/renter/inquiry', 'HomeController@inquiry')->name('inquiry');
+
 
 Auth::routes(['verify' => true]);
 

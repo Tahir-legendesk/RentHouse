@@ -3,191 +3,213 @@
 @section('title', 'Home')
 
 @section('content')
-<main id="main-content">
-    <section class="mainBanner innerBanner">
-        <div class="container">
-            <div class="mb_1 wow fadeInUp">
-                <div class="section_head">
-                    <span>Find best <strong>dream home.</strong></span>
-                    <h1>House Details</h1>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="prop_dets spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-7">
-                    <div class="property_imgs">
-                        <div class="row g-3">
-                            <div class="col-12">
-                                <a href="{{ asset('storage/featured_house/' . $house->featured_image) }}" data-fancybox="prop_imgs"><img src="{{ asset('storage/featured_house/' . $house->featured_image) }}" alt="" class="img-fluid"></a>
-                            </div>
-                            @php
-                                $count = 1;
-                                $all_images = json_decode($house->images);
-                                $total_images = count($all_images);
-                                // dd($total_images);
-                            @endphp
-                            @foreach ($all_images as $item)
-                                @php
-                                    $count_2 = $count ++;
-                                    // echo  $count_2 . "<br>" . $item;
-                                @endphp 
-                                @if($count_2 == 1)
-                                    <div class="col-12">
-                                        <a href="{{ asset('images/' . $item) }}" data-fancybox="prop_imgs"><img src="{{ asset('images/' . $item) }}" alt="" class="img-fluid"></a>
-                                    </div>
-                                @endif
-                                @if($count_2 > 1 && $count_2 < 6)
-                                    <div class="col-6">
-                                        <a href="{{ asset('images/' . $item) }}" data-fancybox="prop_imgs"><img src="{{ asset('images/' . $item) }}" alt="" class="img-fluid"></a>
-                                    </div>
-                                @endif
-                                @if($count_2 >= 5)
-                                    @php
-                                         $count = 1;
-                                     @endphp
-                                @endif 
-                            @endforeach
-                        </div>
+    <main id="main-content">
+        <section class="mainBanner innerBanner">
+            <div class="container">
+                <div class="mb_1 wow fadeInUp">
+                    <div class="section_head">
+                        <span>Find best <strong>dream home.</strong></span>
+                        <h1>House Details</h1>
                     </div>
                 </div>
-                <div class="col-md-5">
-                    <div class="text_wrap">
-                        <div class="ag_card">
-                            <img src="assets/images/ag1.png" alt="" class="img-fluid" loading="lazy">
-                            <div>
-                                <h2>Listed by property owner</h2>
-                                <p>{{$house->user->name}}</p>
-                                <div class="ag_contact">
-                                    <i class="fas fa-phone"></i>
-                                    <a href="#">{{$house->user->contact}}</a>
+            </div>
+        </section>
+        <section class="prop_dets spad">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="property_imgs">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <a href="{{ asset('storage/featured_house/' . $house->featured_image) }}"
+                                        data-fancybox="prop_imgs"><img
+                                            src="{{ asset('storage/featured_house/' . $house->featured_image) }}"
+                                            alt="" class="img-fluid"></a>
+                                </div>
+                                @php
+                                    $count = 1;
+                                    $all_images = json_decode($house->images);
+                                    $total_images = count($all_images);
+                                    // dd($total_images);
+                                @endphp
+                                @foreach ($all_images as $item)
+                                    @php
+                                        $count_2 = $count++;
+                                        // echo  $count_2 . "<br>" . $item;
+                                    @endphp
+                                    @if ($count_2 == 1)
+                                        <div class="col-12">
+                                            <a href="{{ asset('images/' . $item) }}" data-fancybox="prop_imgs"><img
+                                                    src="{{ asset('images/' . $item) }}" alt=""
+                                                    class="img-fluid"></a>
+                                        </div>
+                                    @endif
+                                    @if ($count_2 > 1 && $count_2 < 6)
+                                        <div class="col-6">
+                                            <a href="{{ asset('images/' . $item) }}" data-fancybox="prop_imgs"><img
+                                                    src="{{ asset('images/' . $item) }}" alt=""
+                                                    class="img-fluid"></a>
+                                        </div>
+                                    @endif
+                                    @if ($count_2 >= 5)
+                                        @php
+                                            $count = 1;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="text_wrap">
+                            <div class="ag_card">
+                                <img src="{{ asset('storage/profile_photo/' . $house->user->image) }}" alt=""
+                                    class="img-fluid" loading="lazy">
+                                <div>
+                                    <h2>Listed by property owner</h2>
+                                    <p>{{ $house->user->name }}</p>
+                                    <div class="ag_contact">
+                                        <i class="fas fa-phone"></i>
+                                        <a href="#">{{ $house->user->contact }}</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="prod_col">
-                            <div class="prop_tags">
-                                <span>Apartment</span>
-                                <span>For Rent</span>
-                                <span><a href="" class="fav_btn"><i class="fas fa-heart"></i></a></span>
+                            <div class="prod_col">
+                                <div class="prop_tags">
+                                    <span>Apartment</span>
+                                    <span>For Rent</span>
+                                    <span><a href="" class="fav_btn"><i class="fas fa-heart"></i></a></span>
+                                </div>
+                                <div class="prod_txt">
+                                    <div class="prod_pricing">$ {{ $house->rent }} <small>per month</small></div>
+                                    <h3><a href="#">{{ $house->name }}</a></h3>
+                                    <p>{{ $house->address }}</p>
+                                    <ul>
+                                        <li>
+                                            <i class="fas fa-bed me-2"></i>
+                                            {{ $house->number_of_room }} Bd
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-bath me-2"></i>
+                                            {{ $house->number_of_toilet }} Bd
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-square-full me-2"></i>
+                                            {{ $house->dimension }} sqft
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="btn_group">
+                                    {{-- <a href="" class="theme-btn">Request a tour</a> --}}
+
+                                    @guest
+                                        <a href="" onclick="guestBooking()" class="theme-btn">Apply Now</a>
+                                        {{-- <a href="" onclick="guestBooking()" class="btn btn-info">Apply for booking</a> --}}
+                                    @else
+                                        @if (Auth::user()->role_id == 3)
+                                            <button class="btn btn-info" type="button"
+                                                onclick="renterBooking({{ $house->id }})">
+                                                Apply for booking
+                                            </button>
+
+                                            <form id="booking-form-{{ $house->id }}"
+                                                action="{{ route('booking', $house->id) }}" method="POST"
+                                                style="display: none;">
+                                                @csrf
+                                            </form>
+                                        @endif
+                                    @endguest
+                                </div>
                             </div>
-                            <div class="prod_txt">
-                                <div class="prod_pricing">$ {{$house->rent}} <small>per month</small></div>
-                                <h3><a href="#">{{$house->name}}</a></h3>
-                                <p>{{$house->address}}</p>
-                                <ul>
+                            <div class="prod_dets">
+                                <h3>Rental facts and features</h3>
+                                <h4>Interior details</h4>
+                                <ul class="col_count_2">
                                     <li>
-                                        <i class="fas fa-bed me-2"></i>
-                                        {{$house->number_of_room}} Bd
+                                        Bedrooms and bathrooms
+                                        <ul>
+                                            <li>Bedrooms: {{ $house->number_of_room }}</li>
+                                            <li>Bathrooms: {{ $house->number_of_toilet }}</li>
+                                            <li>Full bathrooms: {{ $house->number_of_toilet }}</li>
+                                        </ul>
                                     </li>
+                                    {{-- {{dd($house)}} --}}
                                     <li>
-                                        <i class="fas fa-bath me-2"></i>
-                                        {{$house->number_of_toilet}} Bd
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-square-full me-2"></i>
-                                        {{$house->dimension}} sqft
+                                        Cooling
+                                        <ul>
+                                            <li>Cooling features: {{ $house->cooling }}</li>
+                                        </ul>
                                     </li>
                                 </ul>
-                            </div>
-                            <div class="btn_group">
-                                <a href="" class="theme-btn">Request a tour</a>
-                                
-                                @guest
-                                <a href="" onclick="guestBooking()" class="theme-btn">Apply Now</a>
-                                {{-- <a href="" onclick="guestBooking()" class="btn btn-info">Apply for booking</a> --}}
-                                @else
-                                    @if (Auth::user()->role_id == 3)
-                                        <button class="btn btn-info" type="button"
-                                            onclick="renterBooking({{ $house->id }})">
-                                            Apply for booking
-                                        </button>
+                                <h4>Property details</h4>
+                                <ul class="col_count_2">
+                                    <li>
+                                        Property
+                                        <ul>
+                                            <li>{{ $house->description }}</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Parking
+                                        <ul>
+                                            <li>Parking features: {{ $house->parking }}</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <h4>Construction details</h4>
+                                <ul class="col_count_2">
+                                    <li>
+                                        Type and style
+                                        <ul>
+                                            <li>Home type: {{ $house->type }}</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <h4>Community and Neighborhood Details</h4>
+                                <ul class="col_count_2">
+                                    <li>
+                                        Community
+                                        <ul>
+                                            <li>Community features: {{ $house->community_feature }}</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Location
+                                        <ul>
 
-                                        <form id="booking-form-{{ $house->id }}" action="{{ route('booking', $house->id) }}"
-                                            method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                    @endif
-                                @endguest
+                                            <li>Region: {{ $house->area->name }}</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <h4>Appliances</h4>
+                                <ul class="col_count_2">
+                                    <li>
+                                        <ul>
+                                            <li>Appliances included: {{ $house->appliances }}</li>
+                                            <li>Laundry features: {{ $house->laundry }}</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <div class="map_holder">
+                                    <iframe
+                                        src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=usa+(My%20Business%20Name)&amp;t=&amp;z=5&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                                        width="600" height="320" style="border:0;" allowfullscreen="" loading="lazy"
+                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                </div>
                             </div>
-                        </div>
-                        <div class="prod_dets">
-                            <h3>Rental facts and features</h3>
-                            <h4>Interior details</h4>
-                            <ul class="col_count_2">
-                                <li>
-                                    Bedrooms and bathrooms
-                                    <ul>
-                                        <li>Bedrooms: {{$house->number_of_room}}</li>
-                                        <li>Bathrooms: {{$house->number_of_toilet}}</li>
-                                        <li>Full bathrooms: {{$house->number_of_toilet}}</li>
-                                    </ul>
-                                </li>
-                                {{-- {{dd($house)}} --}}
-                                <li>
-                                    Cooling
-                                    <ul>
-                                        <li>Cooling features: {{$house->cooling}}</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <h4>Property details</h4>
-                            <ul class="col_count_2">
-                                <li>
-                                    Property
-                                    <ul>
-                                        <li>{{$house->description}}</li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    Parking
-                                    <ul>
-                                        <li>Parking features: {{$house->parking}}</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <h4>Construction details</h4>
-                            <ul class="col_count_2">
-                                <li>
-                                    Type and style
-                                    <ul>
-                                        <li>Home type: {{$house->type}}</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <h4>Community and Neighborhood Details</h4>
-                            <ul class="col_count_2">
-                                <li>
-                                    Community
-                                    <ul>
-                                        <li>Community features: {{$house->community_feature}}</li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    Location
-                                    <ul>
-
-                                        <li>Region: {{$house->area->name}}</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <h4>Appliances</h4>
-                            <ul class="col_count_2">
-                                <li>
-                                    <ul>
-                                        <li>Appliances included: {{$house->appliances}}</li>
-                                        <li>Laundry features: {{$house->laundry}}</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <div class="map_holder">
-                                <iframe src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=usa+(My%20Business%20Name)&amp;t=&amp;z=5&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" width="600" height="320" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            </div>
-                        </div>
-                        <div class="form_style">
-                            <h3>Select a few dates you’re available</h3>
-                            <ul class="select_dates">
+                            <div class="form_style">
+                                @if (session('info'))
+                                    <div class="alert alert-info" role="alert">
+                                        {{ session('info') }}
+                                    </div>
+                                @endif
+                                @if (session('success'))
+                                    <div class="alert alert-success" role="alert">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
+                                <h3>Select a date you’re available</h3>
+                                {{-- <ul class="select_dates">
                                 <li>
                                     <input type="checkbox" id="data1">
                                     <label for="data1">
@@ -220,45 +242,49 @@
                                         <small>Feb</small>
                                     </label>
                                 </li>
-                            </ul>
-                            <input type="date">
-                            <label for="">Your First & Last Name</label>
-                            <input type="text" placeholder="Your First & Last Name">
-                            <label>Phone</label>
-                            <input type="text" placeholder="Phone">
-                            <label>Email</label>
-                            <input type="text" placeholder="Email">
-                            <input type="submit" value="Submit">
-                            <h3>Additional items</h3>
-                            <ul class="custom_checkbox">
-                                <li>
-                                    <input type="checkbox" id="item-tours">
-                                    <label for="item-tours">Tours</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="item-food">
-                                    <label for="item-food">Food</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="item-chef">
-                                    <label for="item-chef">Personal Chef</label>
-                                </li>
-                            </ul>
+                            </ul> --}}
+                                <form action="{{ route('inquiry') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="house_id" value="{{ $house->id }}">
+                                    <input type="date" name="date">
+                                    <label for="">Your Name</label>
+                                    <input type="text" name="name" placeholder="Your First & Last Name">
+                                    <label>Phone</label>
+                                    <input type="text" name="phone" placeholder="Phone number">
+                                    <label>Email</label>
+                                    <input type="text" name="email" placeholder="Email address">
+                                    <input type="submit" value="Request a tour">
+                                    <h3>Additional items</h3>
+                                    <ul class="custom_checkbox">
+                                        <li>
+                                            <input type="checkbox" name="is_tour" id="item-tours">
+                                            <label for="item-tours">Tours</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="is_food" id="item-food">
+                                            <label for="item-food">Food</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="is_p_chef" id="item-chef">
+                                            <label for="item-chef">Personal Chef</label>
+                                        </li>
+                                    </ul>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="reviews_sec spad">
-        <div class="container">
-            <div class="section_head has_mb">
-                <h2>Leave a review</h2>
+        </section>
+        <section class="reviews_sec spad">
+            <div class="container">
+                <div class="section_head has_mb">
+                    <h2>Leave a review</h2>
+                </div>
+                <img src="assets/images/reviews.jpg" alt="" class="img-fluid" loading="lazy">
             </div>
-            <img src="assets/images/reviews.jpg" alt="" class="img-fluid" loading="lazy">
-        </div>
-    </section>
-</main>
+        </section>
+    </main>
     {{-- <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-9">
@@ -421,7 +447,7 @@
 
 @push('custom_script')
     {{-- @section('scripts') --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script>
         window.addEventListener('load', function() {
@@ -434,7 +460,7 @@
         function guestBooking() {
             Swal.fire(
                 'If you want to booking this house',
-                'Then you must have to login first as a renter',
+                'Then you must have to Become a Member first as a renter',
             )
             event.preventDefault();
         }
@@ -471,6 +497,12 @@
                 }
             })
         }
+
+        $(document).ready(function() {
+            $(".alert").fadeTo(4000, 500).slideUp(500, function() {
+                    $(".alert").slideUp(500);
+                });
+        });
     </script>
     {{-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f5fb96836345445"></script> --}}
     {{-- @endsection --}}

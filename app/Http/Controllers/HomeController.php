@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Area;
 use App\Booking;
 use App\House;
+use App\Inquiry;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -176,6 +177,30 @@ class HomeController extends Controller
 
     public function contactUs()
     {
+
+    }
+
+    public function inquiry(Request $request)
+    {
+        // dd($request->all());
+        $checkInquiry = Inquiry::where('email', $request->email)->where('house_id', $request->house_id)->first();
+        if ($checkInquiry) {
+            session()->flash('info', 'You have already sent inquiry for this property');
+        } else {
+            $inquiry = new inquiry();
+            $inquiry->house_id = $request->house_id;
+            $inquiry->date = $request->date;
+            $inquiry->name = $request->name;
+            $inquiry->phone = $request->phone;
+            $inquiry->email = $request->email;
+            $inquiry->is_tour = $request->is_tour ? 1 : 0;
+            $inquiry->is_food = $request->is_food ? 1 : 0;
+            $inquiry->is_p_chef = $request->is_p_chef ? 1 : 0;
+            $inquiry->save();
+            session()->flash('success', 'You have successfully send inquiry for this property');
+            
+        }
+        return redirect()->back();
 
     }
 
