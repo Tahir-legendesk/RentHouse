@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\User;
-use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,7 +21,7 @@ class RegisterController extends Controller
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
-    */
+     */
 
     use RegistersUsers;
 
@@ -38,12 +39,11 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        if (Auth::check() && Auth::user()->role->id == 1 ) {
+        if (Auth::check() && Auth::user()->role->id == 1) {
             $this->redirectTo = route('admin.dashboard');
-        }elseif(Auth::check() && Auth::user()->role->id == 2){
+        } elseif (Auth::check() && Auth::user()->role->id == 2) {
             $this->redirectTo = route('landlord.dashboard');
-        }
-        else{
+        } else {
             $this->redirectTo = route('renter.dashboard');
         }
 
@@ -83,6 +83,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'username' => str_slug($data['username']),
             'email' => $data['email'],
+            'email_verified_at' => Carbon::now(),
             'nid' => $data['nid'],
             'contact' => $data['contact'],
             'password' => Hash::make($data['password']),

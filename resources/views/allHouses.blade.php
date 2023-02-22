@@ -111,7 +111,7 @@
                     <div class="select_arrow">
                         <select name="beds" id="beds">
                             <option selected disabled>Beds</option>
-                            <option value="1 to 5">Option 1</option>
+                            <option value="1 to 5">1 to 5</option>
                             {{-- <option value="6 to 10">Option 2</option>
                             <option value="11 to 20">Option 3</option>
                             <option>Option 4</option>
@@ -127,14 +127,7 @@
                         <i class="fas fa-bath"></i>
                     </div>
                     <div class="select_arrow">
-                        <select>
-                            <option selected disabled>sqft</option>
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
-                            <option>Option 4</option>
-                            <option>Option 5</option>
-                        </select>
+                         <input type="number" name="sqft" id="sqft" class="form-control">
                         <i class="fas fa-square-full"></i>
                     </div>
                 </div>
@@ -188,6 +181,13 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script>
         function filter() {
+            var area = $('#area').val();
+            var price = $('#price').val();
+            var beds = $('#beds').val();
+            var baths = $('#baths').val();
+            var sqft = $('#sqft').val();
+
+            
 
         }
     </script>

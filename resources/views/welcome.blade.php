@@ -75,11 +75,14 @@
         <div class="container">
             <div class="s1_0">
                 <form action="{{ route('search') }}" method="GET">
-                    @csrf
+                    {{-- @csrf --}}
                     <div class="row justify-content-center">
                         @if (session('search'))
-                            <div class="alert alert-danger mt-3" id="alert" roles="alert">
+                            <div class="alert alert-danger" id="alert" roles="alert">
                                 {{ session('search') }}
+                                {{-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button> --}}
                             </div>
                         @endif
                     </div>
@@ -88,35 +91,35 @@
                             <div class="input_group">
                                 <span class="icon icon-location" aria-label="Location Icon"></span>
                                 <label for="">Location</label>
-                                <input type="text" placeholder="Anywhere">
+                                <input type="text" name="location" placeholder="Anywhere">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="input_group">
                                 <span class="icon icon-checkin" aria-label="Check in Icon"></span>
                                 <label for="">Check in</label>
-                                <input type="date" placeholder="Add Date">
+                                <input type="date" name="check_in" placeholder="Add Date">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="input_group">
                                 <span class="icon icon-checkout" aria-label="Check Out Icon"></span>
                                 <label for="">Check Out</label>
-                                <input type="date" placeholder="Anywhere">
+                                <input type="date" name="check_out" >
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="input_group">
                                 <span class="icon icon-adults" aria-label="Adults Icon"></span>
                                 <label for="">Adults</label>
-                                <input type="text" value="2">
+                                <input type="text" name="adults" placeholder="4">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="input_group">
                                 <span class="icon icon-children" aria-label="Children Icon"></span>
                                 <label for="">Children</label>
-                                <input type="text" value="0">
+                                <input type="text" name="children" placeholder="2">
                             </div>
                         </div>
                         <div class="col-md-12 text-center">
@@ -128,163 +131,6 @@
             </div>
         </div>
     </section>
-
-    <section class="s2 spad">
-        <div class="container">
-            <div class="row align-items-xxl-center">
-                <div class="col-md-6 wow fadeInUp" data-wow-delay="0.15s">
-                    <div class="text_wrap">
-                        <div class="section_head">
-                            <h2>With 15 years of experience we are ready to help you</h2>
-                            <p>By connecting patients all over the world to the best instructors, Healthycare
-                                helping
-                                individuals</p>
-                        </div>
-                        <ul class="custom_list">
-                            <li>
-                                <div>
-                                    <h3>Choose your type</h3>
-                                    <p>Sometimes features require a short description.
-                                        This can be detailed description</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <h3>See the properti directly</h3>
-                                    <p>Sometimes features require a short description.
-                                        This can be detailed description</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <h3>Easy Payment</h3>
-                                    <p>Sometimes features require a short description.
-                                        This can be detailed description</p>
-                                </div>
-                            </li>
-                        </ul>
-                        <a href="{{ route('register') }}" class="theme-btn">Become a Member</a>
-                    </div>
-                </div>
-                <div class="col-md-6 wow fadeInUp" data-wow-delay="0.25s">
-                    <div class="img_wrap">
-                        <img src="assets/images/about-side.jpg" alt="" class="img-fluid" loading="lazy">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-    {{-- <div id="content">
-
-        <div class="container">
-            <div class="row justify-content-center py-5">
-                <h1><strong>Available Houses</strong></h1>
-                <hr>
-            </div>
-            <div class="row">
-                <div class="col-md-9">
-
-                    <div class="row">
-                        @forelse ($houses as $house)
-                            <div class="col-md-6">
-                                <div class="card m-3 house-card">
-                                    <div class="card-header">
-                                        <img src="{{ asset('storage/featured_house/' . $house->featured_image) }}"
-                                            width="100%" class="img-fluid" alt="Card image">
-                                    </div>
-                                    <div class="card-body">
-                                        <p>
-                                        <h4><strong><i class="fas fa-map-marker-alt"> {{ $house->area->name }}, Sylhet</i>
-                                            </strong></h4>
-                                        </p>
-
-                                        <p class="grey"><a class="address"
-                                                href="{{ route('house.details', $house->id) }}"><i class="fas fa-warehouse">
-                                                    {{ $house->address }}</i></a> </p>
-                                        <hr>
-                                        <p class="grey"><i class="fas fa-bed"></i> {{ $house->number_of_room }} Bedrooms
-                                            <i class="fas fa-bath float-right"> {{ $house->number_of_toilet }} Bathrooms</i>
-                                        </p>
-                                        <p class="grey">
-                                        <h4>৳ {{ $house->rent }} BDT</i></h4>
-                                        </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="d-flex justify-content-between">
-                                            <div>
-                                                <a href="{{ route('house.details', $house->id) }}"
-                                                    class="btn btn-info">Details</a>
-                                            </div>
-                                            <div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @empty
-                            <h2 class="m-auto py-2 text-white bg-dark p-3">House Not Available right now</h2>
-                        @endforelse
-                    </div>
-
-                    <div class="panel-heading my-4" style="display:flex; justify-content:center;align-items:center;">
-                        <a href="{{ route('house.all') }}" class="btn btn-dark">See All Houses</a>
-                    </div>
-
-
-                </div>
-                <div class="col-md-3">
-                    <ul class="list-group sort">
-                        <li class="list-group-item bg-dark text-light sidebar-heading"><strong>Search By Range</strong>
-                        </li>
-                        <form action="{{ route('searchByRange') }}" method="get" class="mt-2">
-                            <div class="form-group">
-                                <input type="number" class="form-control" required name="digit1"
-                                    placeholder="enter range (lower value)">
-                            </div>
-                            <div class="form-group">
-                                <input type="number" class="form-control" required name="digit2"
-                                    placeholder="enter range (upper value)">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-sm btn-success btn-block">Search</button>
-                            </div>
-                        </form>
-                    </ul>
-
-
-
-
-                    <ul class="list-group sort">
-                        <li class="list-group-item bg-dark text-light sidebar-heading"><strong>Sort By Price</strong></li>
-                        <li class="list-group-item order"><a href="{{ route('highToLow') }}">High to low</a></li>
-                        <li class="list-group-item order"><a href="{{ route('lowToHigh') }}">Low to High</a></li>
-                        <li class="list-group-item order"><a href="{{ route('welcome') }}">Normal Order</a></li>
-                    </ul>
-
-
-
-                    <ul class="list-group area-show">
-                        <li class="list-group-item bg-dark text-light sidebar-heading"><strong>Areas</strong></li>
-                        @forelse ($areas as $area)
-                            <li class="list-group-item all-areas">
-                                <a href="{{ route('available.area.house', $area->id) }}"
-                                    class="area-name">{{ $area->name }}
-                                    <strong>({{ $area->houses->count() }})</strong></a>
-                            </li>
-                        @empty
-                            <li class="list-group-item">Area not found</li>
-                        @endforelse
-
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-    </div> --}}
 
     <section class="s3 spad">
         <div class="container">
@@ -320,7 +166,7 @@
                             </div>
                             <div class="prod_txt">
                                 <div class="prod_pricing">$ {{ $house->rent }} <small>per month</small></div>
-                                <h3><a href="{{ route('house.details', $house->id) }}">Apartment MBS</a></h3>
+                                <h3><a href="{{ route('house.details', $house->id) }}">{{ $house->name }}</a></h3>
                                 <p>{{ $house->address }}</p>
                                 <ul>
                                     <li>
@@ -332,7 +178,8 @@
                                         {{ $house->number_of_toilet }} BT
                                     </li>
                                     <li>
-                                        {{ $house->area->name }}
+                                        <i class="fas fa-square-full me-2"></i>
+                                        {{ $house->dimension }} sqft
                                     </li>
                                 </ul>
                             </div>
@@ -482,6 +329,165 @@
         </div>
     </section>
 
+    <section class="s2 spad">
+        <div class="container">
+            <div class="row align-items-xxl-center">
+                <div class="col-md-6 wow fadeInUp" data-wow-delay="0.15s">
+                    <div class="text_wrap">
+                        <div class="section_head">
+                            <h2>With 15 years of experience we are ready to help you</h2>
+                            <p>By connecting patients all over the world to the best instructors, Healthycare
+                                helping
+                                individuals</p>
+                        </div>
+                        <ul class="custom_list">
+                            <li>
+                                <div>
+                                    <h3>Choose your type</h3>
+                                    <p>Sometimes features require a short description.
+                                        This can be detailed description</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <h3>See the properti directly</h3>
+                                    <p>Sometimes features require a short description.
+                                        This can be detailed description</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <h3>Easy Payment</h3>
+                                    <p>Sometimes features require a short description.
+                                        This can be detailed description</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <a href="{{ route('register') }}" class="theme-btn">Become a Member</a>
+                    </div>
+                </div>
+                <div class="col-md-6 wow fadeInUp" data-wow-delay="0.25s">
+                    <div class="img_wrap">
+                        <img src="assets/images/gal1.png" alt="" class="img-fluid" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    {{-- <div id="content">
+
+        <div class="container">
+            <div class="row justify-content-center py-5">
+                <h1><strong>Available Houses</strong></h1>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+
+                    <div class="row">
+                        @forelse ($houses as $house)
+                            <div class="col-md-6">
+                                <div class="card m-3 house-card">
+                                    <div class="card-header">
+                                        <img src="{{ asset('storage/featured_house/' . $house->featured_image) }}"
+                                            width="100%" class="img-fluid" alt="Card image">
+                                    </div>
+                                    <div class="card-body">
+                                        <p>
+                                        <h4><strong><i class="fas fa-map-marker-alt"> {{ $house->area->name }}, Sylhet</i>
+                                            </strong></h4>
+                                        </p>
+
+                                        <p class="grey"><a class="address"
+                                                href="{{ route('house.details', $house->id) }}"><i class="fas fa-warehouse">
+                                                    {{ $house->address }}</i></a> </p>
+                                        <hr>
+                                        <p class="grey"><i class="fas fa-bed"></i> {{ $house->number_of_room }} Bedrooms
+                                            <i class="fas fa-bath float-right"> {{ $house->number_of_toilet }} Bathrooms</i>
+                                        </p>
+                                        <p class="grey">
+                                        <h4>৳ {{ $house->rent }} BDT</i></h4>
+                                        </p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <a href="{{ route('house.details', $house->id) }}"
+                                                    class="btn btn-info">Details</a>
+                                            </div>
+                                            <div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <h2 class="m-auto py-2 text-white bg-dark p-3">House Not Available right now</h2>
+                        @endforelse
+                    </div>
+
+                    <div class="panel-heading my-4" style="display:flex; justify-content:center;align-items:center;">
+                        <a href="{{ route('house.all') }}" class="btn btn-dark">See All Houses</a>
+                    </div>
+
+
+                </div>
+                <div class="col-md-3">
+                    <ul class="list-group sort">
+                        <li class="list-group-item bg-dark text-light sidebar-heading"><strong>Search By Range</strong>
+                        </li>
+                        <form action="{{ route('searchByRange') }}" method="get" class="mt-2">
+                            <div class="form-group">
+                                <input type="number" class="form-control" required name="digit1"
+                                    placeholder="enter range (lower value)">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" required name="digit2"
+                                    placeholder="enter range (upper value)">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-sm btn-success btn-block">Search</button>
+                            </div>
+                        </form>
+                    </ul>
+
+
+
+
+                    <ul class="list-group sort">
+                        <li class="list-group-item bg-dark text-light sidebar-heading"><strong>Sort By Price</strong></li>
+                        <li class="list-group-item order"><a href="{{ route('highToLow') }}">High to low</a></li>
+                        <li class="list-group-item order"><a href="{{ route('lowToHigh') }}">Low to High</a></li>
+                        <li class="list-group-item order"><a href="{{ route('welcome') }}">Normal Order</a></li>
+                    </ul>
+
+
+
+                    <ul class="list-group area-show">
+                        <li class="list-group-item bg-dark text-light sidebar-heading"><strong>Areas</strong></li>
+                        @forelse ($areas as $area)
+                            <li class="list-group-item all-areas">
+                                <a href="{{ route('available.area.house', $area->id) }}"
+                                    class="area-name">{{ $area->name }}
+                                    <strong>({{ $area->houses->count() }})</strong></a>
+                            </li>
+                        @empty
+                            <li class="list-group-item">Area not found</li>
+                        @endforelse
+
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div> --}}
+
+    
+
     <section class="s4 spad">
         <div class="container">
             <div class="row align-items-lg-center">
@@ -530,7 +536,7 @@
                         </div>
                         <p>ccusamus et iusto odio dignissimos ducimus qui blanditiis praesen tiumc cusamus et iusto
                             odio</p>
-                        <a href="{{route('atv-rental')}}" class="theme-btn">View Details</a>
+                        {{-- <a href="{{route('atv-rental')}}" class="theme-btn">View Details</a> --}}
                         <div class="row has_mt">
                             <div class="col-md-6">
                                 <img src="assets/images/atv-thumb1.png" alt="" class="img-fluid" loading="lazy">
