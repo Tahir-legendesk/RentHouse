@@ -8,6 +8,9 @@ use App\House;
 use App\Inquiry;
 use App\User;
 use Illuminate\Http\Request;
+use App\Subscribe;
+use App\Contact;
+use App\ATV;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -34,6 +37,15 @@ class HomeController extends Controller
         return view('welcome', compact('houses', 'areas'));
     }
 
+    public function subscribe(Request $request){
+        $subscribe = new Subscribe;
+        $subscribe->email = $request->email;
+        $subscribe->save();
+        return response()->json([
+            'message' => 'success'
+        ]);
+    }
+
     public function highToLow()
     {
         $houses = House::where('status', 1)->orderBy('rent', 'DESC')->paginate(6);
@@ -54,12 +66,43 @@ class HomeController extends Controller
         return view('houseDetails', compact('house'));
     }
 
-    public function allHouses()
+    public function allHouses(Request $request)
     {
-        $houses = House::latest()->where('status', 1)->get();
+        $houses = House::where('status', 1);
         // return view('allHouses', compact('houses'));
-        return view('allHouses', get_defined_vars());
+        $area = $request->area;
+        $price = $request->price;
+        $beds = $request->beds;
+        $baths = $request->baths;
+        $sqft = $request->sqft;
+  
+        if ($request->location != null) {
+            $houses = $houses->whereHas('area', function ($q) use ($area) {
+                $q->where('name', 'LIKE', "%$area%");
+            });
+        }
+        if($request->houses){
+            // dd('sss');
+        }
+        
+        if($request->price != null){
+            //  dd(
+            
+        } 
+        
+        if($request->beds){
 
+        }
+
+        if($request->baths){
+
+        }
+
+        if($request->sqft){
+
+        }   
+        $houses = $houses->paginate(12);
+        return view('allHouses',get_defined_vars());
     }
 
     public function areaWiseShow($id)
@@ -167,7 +210,8 @@ class HomeController extends Controller
 
     public function atvRental()
     {
-        return view('atv');
+        $atvs = ATV::where('is_active',1)->get();
+        return view('atv',get_defined_vars());
     }
 
     public function contact()
@@ -175,9 +219,19 @@ class HomeController extends Controller
         return view('contact-us');
     }
 
-    public function contactUs()
-    {
+    public function contactUs(Request $request){
 
+        $contact = new Contact;
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->phone = $request->phone;
+        $contact->message = $request->message;
+        $contact->save();
+        return redirect()->back()->with('message','Thanks for contacting us. we\'ll reach you as soon as possible.');
+    }
+
+    public function filterhouse(Request $request){
+        dd($request->all());
     }
 
     public function inquiry(Request $request)

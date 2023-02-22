@@ -76,80 +76,73 @@
                 </div>
             </div>
         </section>
+        @php
+            $area = App\Area::all();
+        @endphp
         <section class="property_listing spad">
             <div class="container">
-                <div class="section_head has_mb">
-                    <h2>Search by category</h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. has been the industry's
-                        standard dummy text ever</p>
-                </div>
-                <div class="filter_opts">
-                    <div class="select_arrow">
-                        <select>
-                            <option selected disabled>Locations</option>
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
-                            <option>Option 4</option>
-                            <option>Option 5</option>
-                        </select>
-                        <i class="fas fa-map-marker-plus"></i>
+                <form method="get" id="filter-form">
+                    <div class="section_head has_mb">
+                        <h2>Search by category</h2>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. has been the
+                            industry's
+                            standard dummy text ever</p>
                     </div>
-                    <div class="select_arrow">
-                        <select>
-                            <option selected disabled>Price</option>
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
+                    <div class="filter_opts">
+                        <div class="select_arrow">
+                            <select id="area" name="area" onchange="filter()">
+                                <option selected disabled>Locations</option>
+                                @foreach ($area as $item)
+                                    <option @if ($item->name == $request->area) selected @endif value="{{$item->name}}">
+                                        {{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                            <i class="fas fa-map-marker-plus"></i>
+                        </div>
+                        <div class="select_arrow">
+                            <select name="price" id="price" onchange="filter()">
+                                <option selected disabled>Price</option>
+                                <option value="$0.00 to $1,000">$0.00 to $1,000</option>
+                                <option value="$2,000 to $3,000">$2,000 to $3,000</option>
+                                <option value="$4,000 to $5,000">$4,000 to $5,000</option>
+                                <option value="$6,000 to $7,000">$6,000 to $7,000</option>
+                                <option value="$8,000 to $9,000">$8,000 to $9,000</option>
+                            </select>
+                            <i class="fas fa-money-check-alt"></i>
+                        </div>
+                        <div class="select_arrow">
+                            <select name="beds" id="beds" onchange="filter()">
+                                <option selected disabled>Beds</option>
+                                <option value="1 to 5">1 to 5</option>
+                                {{-- <option value="6 to 10">Option 2</option>
+                            <option value="11 to 20">Option 3</option>
                             <option>Option 4</option>
-                            <option>Option 5</option>
-                        </select>
-                        <i class="fas fa-money-check-alt"></i>
+                            <option>Option 5</option> --}}
+                            </select>
+                            <i class="fas fa-bed"></i>
+                        </div>
+                        <div class="select_arrow">
+                            <select name="baths" id="baths"onchange="filter()">
+                                <option selected disabled>Baths</option>
+                                <option value="1 to 5">1 to 5</option>
+                            </select>
+                            <i class="fas fa-bath"></i>
+                        </div>
+                        <div class="select_arrow">
+                            <input type="number" onkeypress="filter()" name="sqft" id="sqft" class="form-control">
+                            <i class="fas fa-square-full"></i>
+                        </div>
                     </div>
-                    <div class="select_arrow">
-                        <select>
-                            <option selected disabled>Beds</option>
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
-                            <option>Option 4</option>
-                            <option>Option 5</option>
-                        </select>
-                        <i class="fas fa-bed"></i>
-                    </div>
-                    <div class="select_arrow">
-                        <select>
-                            <option selected disabled>Baths</option>
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
-                            <option>Option 4</option>
-                            <option>Option 5</option>
-                        </select>
-                        <i class="fas fa-bath"></i>
-                    </div>
-                    <div class="select_arrow">
-                        <select>
-                            <option selected disabled>sqft</option>
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
-                            <option>Option 4</option>
-                            <option>Option 5</option>
-                        </select>
-                        <i class="fas fa-square-full"></i>
-                    </div>
-                </div>
-                <div class="row gy-5">
-                    {{-- {{dd(count($houses))}} --}}
-                    @if (count($houses) > 0)
+                    <div class="row gy-5">
+
                         @foreach ($houses as $house)
                             <div class="col-sm-6 col-md-4">
                                 <div class="prod_col wow fadeInUp" data-wow-delay="0.15s">
                                     <div class="prod_img">
-                                        <a href="{{ route('house.details', $house->id) }}"><img
-                                                src="{{ asset('storage/featured_house/' . $house->featured_image) }}"
-                                                alt="" class="img-fluid" loading="lazy"></a>
+                                        <a href="house-details.php">
+                                            <img src="assets/images/pop1.jpg" alt="" class="img-fluid"
+                                                loading="lazy">
+                                        </a>
                                         <a href="" class="fav_btn"><i class="fas fa-heart"></i></a>
                                         <div class="prop_tags">
                                             <span>Apartment</span>
@@ -157,483 +150,67 @@
                                         </div>
                                     </div>
                                     <div class="prod_txt">
-                                        <div class="prod_pricing">$ {{ $house->rent }} <small>per month</small></div>
-                                        <h3><a href="{{ route('house.details', $house->id) }}">{{ $house->name }}</a></h3>
-                                        <p>{{ $house->address }}</p>
+                                        <div class="prod_pricing">
+                                            $ 220,00
+                                            <small>per month</small>
+                                        </div>
+                                        <h3><a href="house-details.php">Apartment MBS</a></h3>
+                                        <p>Perum MBS, No 113 Condong Catur, Sleman Yogyakarta..</p>
                                         <ul>
                                             <li>
                                                 <i class="fas fa-bed me-2"></i>
-                                                {{ $house->number_of_room }} Bd
+                                                2 Bd
                                             </li>
                                             <li>
                                                 <i class="fas fa-bath me-2"></i>
-                                                {{ $house->number_of_toilet }} BT
+                                                1 Bd
                                             </li>
                                             <li>
                                                 <i class="fas fa-square-full me-2"></i>
-                                                {{ $house->dimension }} sqft
+                                                726sqft
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-                    @endif
 
-
-                    {{-- <div class="col-sm-6 col-md-4">
-                    <div class="prod_col wow fadeInUp" data-wow-delay="0.25s">
-                        <div class="prod_img">
-                            <a href="house-details.php"><img src="assets/images/pop2.jpg" alt="" class="img-fluid" loading="lazy"></a>
-                            <a href="" class="fav_btn"><i class="fas fa-heart"></i></a>
-                            <div class="prop_tags">
-                                <span>Apartment</span>
-                                <span>For Rent</span>
-                            </div>
-                        </div>
-                        <div class="prod_txt">
-                            <div class="prod_pricing">$ 144.220,00 <small>per month</small></div>
-                            <h3><a href="house-details.php">House of Raminten</a></h3>
-                            <p>Perum MBS, No 113 Condong Catur, Sleman Yogyakarta..</p>
-                            <ul>
-                                <li>
-                                    <i class="fas fa-bed me-2"></i>
-                                    2 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-bath me-2"></i>
-                                    1 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-square-full me-2"></i>
-                                    726sqft
-                                </li>
-                            </ul>
-                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="prod_col wow fadeInUp" data-wow-delay="0.35s">
-                        <div class="prod_img">
-                            <a href="house-details.php"><img src="assets/images/pop3.jpg" alt="" class="img-fluid" loading="lazy"></a>
-                            <a href="" class="fav_btn"><i class="fas fa-heart"></i></a>
-                            <div class="prop_tags">
-                                <span>House</span>
-                                <span>For Rent</span>
-                            </div>
-                        </div>
-                        <div class="prod_txt">
-                            <div class="prod_pricing">$ 144.530,00 <small>per month</small></div>
-                            <h3><a href="house-details.php">House of BTPN</a></h3>
-                            <p>Perum MBS, No 113 Condong Catur, Sleman Yogyakarta..</p>
-                            <ul>
-                                <li>
-                                    <i class="fas fa-bed me-2"></i>
-                                    2 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-bath me-2"></i>
-                                    1 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-square-full me-2"></i>
-                                    726sqft
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="prod_col wow fadeInUp" data-wow-delay="0.15s">
-                        <div class="prod_img">
-                            <a href="house-details.php"><img src="assets/images/pop1.jpg" alt="" class="img-fluid" loading="lazy"></a>
-                            <a href="" class="fav_btn"><i class="fas fa-heart"></i></a>
-                            <div class="prop_tags">
-                                <span>Apartment</span>
-                                <span>For Rent</span>
-                            </div>
-                        </div>
-                        <div class="prod_txt">
-                            <div class="prod_pricing">$ 220,00 <small>per month</small></div>
-                            <h3><a href="house-details.php">Apartment MBS</a></h3>
-                            <p>Perum MBS, No 113 Condong Catur, Sleman Yogyakarta..</p>
-                            <ul>
-                                <li>
-                                    <i class="fas fa-bed me-2"></i>
-                                    2 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-bath me-2"></i>
-                                    1 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-square-full me-2"></i>
-                                    726sqft
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="prod_col wow fadeInUp" data-wow-delay="0.25s">
-                        <div class="prod_img">
-                            <a href="house-details.php"><img src="assets/images/pop2.jpg" alt="" class="img-fluid" loading="lazy"></a>
-                            <a href="" class="fav_btn"><i class="fas fa-heart"></i></a>
-                            <div class="prop_tags">
-                                <span>Apartment</span>
-                                <span>For Rent</span>
-                            </div>
-                        </div>
-                        <div class="prod_txt">
-                            <div class="prod_pricing">$ 144.220,00 <small>per month</small></div>
-                            <h3><a href="house-details.php">House of Raminten</a></h3>
-                            <p>Perum MBS, No 113 Condong Catur, Sleman Yogyakarta..</p>
-                            <ul>
-                                <li>
-                                    <i class="fas fa-bed me-2"></i>
-                                    2 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-bath me-2"></i>
-                                    1 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-square-full me-2"></i>
-                                    726sqft
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="prod_col wow fadeInUp" data-wow-delay="0.35s">
-                        <div class="prod_img">
-                            <a href="house-details.php"><img src="assets/images/pop3.jpg" alt="" class="img-fluid" loading="lazy"></a>
-                            <a href="" class="fav_btn"><i class="fas fa-heart"></i></a>
-                            <div class="prop_tags">
-                                <span>House</span>
-                                <span>For Rent</span>
-                            </div>
-                        </div>
-                        <div class="prod_txt">
-                            <div class="prod_pricing">$ 144.530,00 <small>per month</small></div>
-                            <h3><a href="house-details.php">House of BTPN</a></h3>
-                            <p>Perum MBS, No 113 Condong Catur, Sleman Yogyakarta..</p>
-                            <ul>
-                                <li>
-                                    <i class="fas fa-bed me-2"></i>
-                                    2 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-bath me-2"></i>
-                                    1 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-square-full me-2"></i>
-                                    726sqft
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="prod_col wow fadeInUp" data-wow-delay="0.15s">
-                        <div class="prod_img">
-                            <a href="house-details.php"><img src="assets/images/pop1.jpg" alt="" class="img-fluid" loading="lazy"></a>
-                            <a href="" class="fav_btn"><i class="fas fa-heart"></i></a>
-                            <div class="prop_tags">
-                                <span>Apartment</span>
-                                <span>For Rent</span>
-                            </div>
-                        </div>
-                        <div class="prod_txt">
-                            <div class="prod_pricing">$ 220,00 <small>per month</small></div>
-                            <h3><a href="house-details.php">Apartment MBS</a></h3>
-                            <p>Perum MBS, No 113 Condong Catur, Sleman Yogyakarta..</p>
-                            <ul>
-                                <li>
-                                    <i class="fas fa-bed me-2"></i>
-                                    2 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-bath me-2"></i>
-                                    1 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-square-full me-2"></i>
-                                    726sqft
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="prod_col wow fadeInUp" data-wow-delay="0.25s">
-                        <div class="prod_img">
-                            <a href="house-details.php"><img src="assets/images/pop2.jpg" alt="" class="img-fluid" loading="lazy"></a>
-                            <a href="" class="fav_btn"><i class="fas fa-heart"></i></a>
-                            <div class="prop_tags">
-                                <span>Apartment</span>
-                                <span>For Rent</span>
-                            </div>
-                        </div>
-                        <div class="prod_txt">
-                            <div class="prod_pricing">$ 144.220,00 <small>per month</small></div>
-                            <h3><a href="house-details.php">House of Raminten</a></h3>
-                            <p>Perum MBS, No 113 Condong Catur, Sleman Yogyakarta..</p>
-                            <ul>
-                                <li>
-                                    <i class="fas fa-bed me-2"></i>
-                                    2 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-bath me-2"></i>
-                                    1 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-square-full me-2"></i>
-                                    726sqft
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="prod_col wow fadeInUp" data-wow-delay="0.35s">
-                        <div class="prod_img">
-                            <a href="house-details.php"><img src="assets/images/pop3.jpg" alt="" class="img-fluid" loading="lazy"></a>
-                            <a href="" class="fav_btn"><i class="fas fa-heart"></i></a>
-                            <div class="prop_tags">
-                                <span>House</span>
-                                <span>For Rent</span>
-                            </div>
-                        </div>
-                        <div class="prod_txt">
-                            <div class="prod_pricing">$ 144.530,00 <small>per month</small></div>
-                            <h3><a href="house-details.php">House of BTPN</a></h3>
-                            <p>Perum MBS, No 113 Condong Catur, Sleman Yogyakarta..</p>
-                            <ul>
-                                <li>
-                                    <i class="fas fa-bed me-2"></i>
-                                    2 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-bath me-2"></i>
-                                    1 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-square-full me-2"></i>
-                                    726sqft
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="prod_col wow fadeInUp" data-wow-delay="0.15s">
-                        <div class="prod_img">
-                            <a href="house-details.php"><img src="assets/images/pop1.jpg" alt="" class="img-fluid" loading="lazy"></a>
-                            <a href="" class="fav_btn"><i class="fas fa-heart"></i></a>
-                            <div class="prop_tags">
-                                <span>Apartment</span>
-                                <span>For Rent</span>
-                            </div>
-                        </div>
-                        <div class="prod_txt">
-                            <div class="prod_pricing">$ 220,00 <small>per month</small></div>
-                            <h3><a href="house-details.php">Apartment MBS</a></h3>
-                            <p>Perum MBS, No 113 Condong Catur, Sleman Yogyakarta..</p>
-                            <ul>
-                                <li>
-                                    <i class="fas fa-bed me-2"></i>
-                                    2 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-bath me-2"></i>
-                                    1 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-square-full me-2"></i>
-                                    726sqft
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="prod_col wow fadeInUp" data-wow-delay="0.25s">
-                        <div class="prod_img">
-                            <a href="house-details.php"><img src="assets/images/pop2.jpg" alt="" class="img-fluid" loading="lazy"></a>
-                            <a href="" class="fav_btn"><i class="fas fa-heart"></i></a>
-                            <div class="prop_tags">
-                                <span>Apartment</span>
-                                <span>For Rent</span>
-                            </div>
-                        </div>
-                        <div class="prod_txt">
-                            <div class="prod_pricing">$ 144.220,00 <small>per month</small></div>
-                            <h3><a href="house-details.php">House of Raminten</a></h3>
-                            <p>Perum MBS, No 113 Condong Catur, Sleman Yogyakarta..</p>
-                            <ul>
-                                <li>
-                                    <i class="fas fa-bed me-2"></i>
-                                    2 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-bath me-2"></i>
-                                    1 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-square-full me-2"></i>
-                                    726sqft
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="prod_col wow fadeInUp" data-wow-delay="0.35s">
-                        <div class="prod_img">
-                            <a href="house-details.php"><img src="assets/images/pop3.jpg" alt="" class="img-fluid" loading="lazy"></a>
-                            <a href="" class="fav_btn"><i class="fas fa-heart"></i></a>
-                            <div class="prop_tags">
-                                <span>House</span>
-                                <span>For Rent</span>
-                            </div>
-                        </div>
-                        <div class="prod_txt">
-                            <div class="prod_pricing">$ 144.530,00 <small>per month</small></div>
-                            <h3><a href="house-details.php">House of BTPN</a></h3>
-                            <p>Perum MBS, No 113 Condong Catur, Sleman Yogyakarta..</p>
-                            <ul>
-                                <li>
-                                    <i class="fas fa-bed me-2"></i>
-                                    2 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-bath me-2"></i>
-                                    1 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-square-full me-2"></i>
-                                    726sqft
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="prod_col wow fadeInUp" data-wow-delay="0.15s">
-                        <div class="prod_img">
-                            <a href="house-details.php"><img src="assets/images/pop1.jpg" alt="" class="img-fluid" loading="lazy"></a>
-                            <a href="" class="fav_btn"><i class="fas fa-heart"></i></a>
-                            <div class="prop_tags">
-                                <span>Apartment</span>
-                                <span>For Rent</span>
-                            </div>
-                        </div>
-                        <div class="prod_txt">
-                            <div class="prod_pricing">$ 220,00 <small>per month</small></div>
-                            <h3><a href="house-details.php">Apartment MBS</a></h3>
-                            <p>Perum MBS, No 113 Condong Catur, Sleman Yogyakarta..</p>
-                            <ul>
-                                <li>
-                                    <i class="fas fa-bed me-2"></i>
-                                    2 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-bath me-2"></i>
-                                    1 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-square-full me-2"></i>
-                                    726sqft
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="prod_col wow fadeInUp" data-wow-delay="0.25s">
-                        <div class="prod_img">
-                            <a href="house-details.php"><img src="assets/images/pop2.jpg" alt="" class="img-fluid" loading="lazy"></a>
-                            <a href="" class="fav_btn"><i class="fas fa-heart"></i></a>
-                            <div class="prop_tags">
-                                <span>Apartment</span>
-                                <span>For Rent</span>
-                            </div>
-                        </div>
-                        <div class="prod_txt">
-                            <div class="prod_pricing">$ 144.220,00 <small>per month</small></div>
-                            <h3><a href="house-details.php">House of Raminten</a></h3>
-                            <p>Perum MBS, No 113 Condong Catur, Sleman Yogyakarta..</p>
-                            <ul>
-                                <li>
-                                    <i class="fas fa-bed me-2"></i>
-                                    2 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-bath me-2"></i>
-                                    1 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-square-full me-2"></i>
-                                    726sqft
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="prod_col wow fadeInUp" data-wow-delay="0.35s">
-                        <div class="prod_img">
-                            <a href="house-details.php"><img src="assets/images/pop3.jpg" alt="" class="img-fluid" loading="lazy"></a>
-                            <a href="" class="fav_btn"><i class="fas fa-heart"></i></a>
-                            <div class="prop_tags">
-                                <span>House</span>
-                                <span>For Rent</span>
-                            </div>
-                        </div>
-                        <div class="prod_txt">
-                            <div class="prod_pricing">$ 144.530,00 <small>per month</small></div>
-                            <h3><a href="house-details.php">House of BTPN</a></h3>
-                            <p>Perum MBS, No 113 Condong Catur, Sleman Yogyakarta..</p>
-                            <ul>
-                                <li>
-                                    <i class="fas fa-bed me-2"></i>
-                                    2 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-bath me-2"></i>
-                                    1 Bd
-                                </li>
-                                <li>
-                                    <i class="fas fa-square-full me-2"></i>
-                                    726sqft
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> --}}
-                </div>
+                </form>
             </div>
         </section>
-
     </main>
 @endsection
-{{-- @section('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-<script>
-    function guestBooking(){
-                Swal.fire({
-                    title: 'To book a house, You Need To Login First as a Renter!',
-                    showClass: {
-                        popup: 'animated fadeInDown faster'
-                    },
-                    hideClass: {
-                        popup: 'animated fadeOutUp faster'
-                    }
-                    })
+@push('custom_script')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script>
+        function filter() {
+            // e.preventDefault();
+            var form = new FormData(document.getElementById('filter-form'));
+            var area = $('#area').val();
+            var price = $('#price').val();
+            var beds = $('#beds').val();
+            var baths = $('#baths').val();
+            var sqft = $('#sqft').val();
+
+            if(area != null || price != null || beds != null || baths != null || sqft != null){
+            // $.ajax({
+            //     url: '/filterhouse',
+            //     type: 'get',
+            //     data:  form,
+            //     cache: false,
+            //     contentType: false, //must, tell jQuery not to process the data
+            //     processData: false,
+
+            //     success: function(response) {
+
+            //         console.log(response);
+
+            //     }
+            // });
+                window.location = '/all-available/houses?area='+area+'&&price='+price+'&&beds='+beds+'&&baths='+baths+'&&sqft='+sqft+'  ';
             }
-</script>
-@endsection --}}
+
+        }
+    </script>
+@endpush

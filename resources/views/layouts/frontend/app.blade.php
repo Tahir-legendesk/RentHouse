@@ -79,6 +79,33 @@
     {{-- </div> --}}
     @include('../includes/scripts')
     @stack('custom_script')
+
+    <script>
+        // Add record
+        $('#subscribe_form').submit(function(e) {
+            document.getElementById('success_alert').style.display = "none";
+            e.preventDefault();
+            var form = new FormData(document.getElementById('subscribe_form'));
+            var token = $('#token').val();
+            form.append('_token', token);
+            $.ajax({
+                url: '/subscribe',
+                type: 'post',
+                data: form,
+                cache: false,
+                contentType: false, //must, tell jQuery not to process the data
+                processData: false,
+
+                success: function(response) {
+                    $('#subscribe_form').get(0).reset();
+                    document.getElementById('success_alert').style.display = "block";
+                }
+            });
+
+
+        });
+    </script>
+
 </body>
 
 </html>

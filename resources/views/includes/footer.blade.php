@@ -27,8 +27,12 @@
  			<div class="col-md-3">
  				<div class="sf_2">
  					<h3>Subscribe Us</h3>
- 					<input type="email" placeholder="Your email here...">
- 					<input type="submit" value="Subscribe">
+					<div class="alert alert-success" id="success_alert" style="display: none;">Thanks for subscribing us</div>
+					 <form method="post" id="subscribe_form">
+						<input type="hidden" id="token" value="{{ csrf_token() }}">
+						<input type="email" name="email" placeholder="Your email here...">
+						<input type="submit" value="Subscribe">
+					  </form>
  				</div>
  			</div>
  		</div>

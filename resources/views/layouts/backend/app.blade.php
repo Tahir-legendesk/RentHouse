@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{{asset('backend/css/app.css')}}">
   <link rel="stylesheet" href="{{asset('backend/css/custom.css')}}">
   <link rel="stylesheet" href="{{asset('backend/css/style.css')}}">
+  
   @yield('css')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">

@@ -37,6 +37,12 @@
           </a>
         </li>
 
+        <li class="nav-item has-treeview">
+          <a href="{{ route('admin.atv.list') }}" class="nav-link {{ Request::is('admin/atv-list*') ? 'active' : '' }}">
+            <i class="fas fa-quad" aria-hidden="true"></i>
+            <p class="pl-2">ATV's</p>
+          </a>
+        </li>
 
         <li class="nav-item has-treeview">
           <a href="{{ route('admin.area.index') }}" class="nav-link {{ Request::is('admin/area*') ? 'active' : '' }}">
