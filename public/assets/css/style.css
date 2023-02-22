@@ -1533,7 +1533,6 @@ ul.custom_list li::before {
   height: 440px;
   width: auto;
   object-fit: none;
-  object-position: bottom left;
 }
 .atv_card h3 {
   font-size: 35px;

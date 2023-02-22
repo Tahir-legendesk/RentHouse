@@ -213,12 +213,12 @@
                             </div>
                             <div class="form_style">
                                 @if (session('info'))
-                                    <div class="alert alert-info" role="alert">
+                                    <div class="atv-alert alert-info" role="alert">
                                         {{ session('info') }}
                                     </div>
                                 @endif
                                 @if (session('success'))
-                                    <div class="alert alert-success" role="alert">
+                                    <div class="atv-alert alert-success" role="alert">
                                         {{ session('success') }}
                                     </div>
                                 @endif
@@ -513,8 +513,8 @@
         }
 
         $(document).ready(function() {
-            $(".alert").fadeTo(4000, 500).slideUp(500, function() {
-                $(".alert").slideUp(500);
+            $(".atv-alert").fadeTo(4000, 500).slideUp(500, function() {
+                $(".atv-alert").slideUp(500);
             });
         });
     </script>
