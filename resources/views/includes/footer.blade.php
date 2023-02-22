@@ -19,7 +19,7 @@
 						<li><a href="{{route('house-all')}}">Rent</a></li>
 						{{-- <li><a href="agents.php">Agent</a></li> --}}
 						<li><a href="{{ route('register') }}">Become a Member</a></li>
-						<li><a href="{{route('atv-rental')}}">ATV’s rentals</a></li>
+						{{-- <li><a href="{{route('atv-rental')}}">ATV’s rentals</a></li> --}}
 						<li><a href="{{route('contact')}}">Contact Us</a></li>
  					</ul>
  				</nav>

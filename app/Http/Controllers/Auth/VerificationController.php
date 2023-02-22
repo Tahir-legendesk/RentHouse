@@ -50,17 +50,17 @@ class VerificationController extends Controller
 
     public function verify(Request $request)
     {
-            $user = User::find($request->route('id'));
+            // $user = User::find($request->route('id'));
 
-            auth()->login($user);
+            // auth()->login($user);
 
-            if ($request->user()->hasVerifiedEmail()) {
-                return redirect($this->redirectPath());
-            }
+            // if ($request->user()->hasVerifiedEmail()) {
+            //     return redirect($this->redirectPath());
+            // }
 
-            if ($request->user()->markEmailAsVerified()) {
-                event(new Verified($request->user()));
-            }
+            // if ($request->user()->markEmailAsVerified()) {
+            //     event(new Verified($request->user()));
+            // }
 
             if(Auth::check() && Auth::user()->role->id ==1 ){
                 $this->redirectTo = route('admin.dashboard');
