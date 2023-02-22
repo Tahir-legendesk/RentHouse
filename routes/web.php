@@ -11,6 +11,9 @@
 |
  */
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', 'HomeController@index')->name('welcome');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/atv-rental', 'HomeController@atvRental')->name('atv-rental');
@@ -45,8 +48,10 @@ Route::get('auth/google/callback', 'Auth\GoogleController@handleGoogleCallback')
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin', 'verified']],
     function () {
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+
         Route::resource('area', 'AreaController');
         Route::resource('house', 'HouseController');
+
         Route::get('manage-landlord', 'HouseController@manageLandlord')->name('manage.landlord');
         Route::delete('manage-landlord/destroy/{id}', 'HouseController@removeLandlord')->name('remove.landlord');
 
@@ -60,13 +65,14 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
         Route::get('booked-houses-list', 'BookingController@bookedList')->name('booked.list');
         Route::get('booked-houses-history', 'BookingController@historyList')->name('history.list');
 
+        Route::get('atv-list', 'AtvController@atv_show')->name('atv.list');
+        Route::get('atv-create', 'AtvController@create')->name('atv.create');
     });
-
-//landlord
 
 Route::group(['as' => 'landlord.', 'prefix' => 'landlord', 'namespace' => 'Landlord', 'middleware' => ['auth', 'landlord', 'verified']],
     function () {
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+
         Route::resource('area', 'AreaController');
         Route::resource('house', 'HouseController');
         Route::get('house/switch-status/{id}', 'HouseController@switch')->name('house.status');
@@ -74,6 +80,7 @@ Route::group(['as' => 'landlord.', 'prefix' => 'landlord', 'namespace' => 'Landl
         Route::get('booking-request-list', 'BookingController@bookingRequestListForLandlord')->name('bookingRequestList');
         Route::post('booking-request/accept/{id}', 'BookingController@bookingRequestAccept')->name('request.accept');
         Route::post('booking-request/reject/{id}', 'BookingController@bookingRequestReject')->name('request.reject');
+
         Route::get('booking/history', 'BookingController@bookingHistory')->name('history');
         Route::get('booked/currently/renter', 'BookingController@currentlyStaying')->name('currently.staying');
         Route::post('renter/leave/{id}', 'BookingController@leaveRenter')->name('leave.renter');
@@ -90,7 +97,6 @@ Route::group(['as' => 'renter.', 'prefix' => 'renter', 'namespace' => 'renter', 
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
         Route::get('areas', 'DashboardController@areas')->name('areas');
-
         Route::get('houses', 'DashboardController@allHouses')->name('allHouses');
         Route::get('house/details/{id}', 'DashboardController@housesDetails')->name('houses.details');
 

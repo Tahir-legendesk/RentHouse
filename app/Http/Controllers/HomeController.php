@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Subscribe;
 use App\Contact;
+use App\ATV;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -64,11 +65,11 @@ class HomeController extends Controller
         return view('houseDetails', compact('house'));
     }
 
-    public function allHouses()
+    public function allHouses(Request $request)
     {
-        // $houses = House::latest()->where('status', 1)->paginate(12);
+        $houses = House::where('status', 1)->paginate(12);
         // return view('allHouses', compact('houses'));
-        return view('allHouses');
+        return view('allHouses',get_defined_vars());
 
     }
 
@@ -158,7 +159,8 @@ class HomeController extends Controller
 
     public function atvRental()
     {
-        return view('atv');
+        $atvs = ATV::where('is_active',1)->get();
+        return view('atv',get_defined_vars());
     }
 
     public function contact()

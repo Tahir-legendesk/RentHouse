@@ -1,22 +1,22 @@
 @extends('layouts.backend.app')
 @section('title')
-   Details - {{ $house->address }}
+    Details - {{ $house->address }}
 @endsection
 @section('content')
-<div class="container">
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-9">
                 <div class="card mt-5">
                     <div class="card-header">
-                      <div class="d-flex justify-content-between">
-                          <div>
-                              <h3><strong>House Details</strong></h3>
-                          </div>
-                          <div>
-                              <a class="btn btn-danger" href="{{ route('admin.house.index') }}"> Back</a>
-                          </div>
-                      </div>
-                  
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h3><strong>House Details</strong></h3>
+                            </div>
+                            <div>
+                                <a class="btn btn-danger" href="{{ route('admin.house.index') }}"> Back</a>
+                            </div>
+                        </div>
+
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -66,43 +66,43 @@
                                         @else
                                             <span class="btn btn-danger">Not Available</span>
                                         @endif
-                                </td>
+                                    </td>
                                 </tr>
                             </table>
-                          </div>
+                        </div>
 
-                          <div class="row gallery">
+                        <div class="row gallery">
                             @foreach (json_decode($house->images) as $picture)
-                                       <div class="col-md-3">
-                                           <a href="{{ asset('images/'.$picture) }}">
-                                                       <img  src="{{ asset('images/'.$picture) }}" class="img-fluid m-2"
-                                                        style="height: 150px;width: 100%; ">
-                                           </a>
-                                       </div>
+                                <div class="col-md-3">
+                                    <a href="{{ asset('images/' . $picture) }}">
+                                        <img src="{{ asset('images/' . $picture) }}" class="img-fluid m-2"
+                                            style="height: 150px;width: 100%; ">
+                                    </a>
+                                </div>
                             @endforeach
-                       </div>
+                        </div>
                     </div>
-                   
+
                     <!-- /.card-body -->
-                  </div>
-                  <!-- /.card -->
+                </div>
+                <!-- /.card -->
             </div>
         </div>
     </div><!-- /.container -->
- @endsection
+@endsection
 
 
- @section('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
-<script>
-   window.addEventListener('load', function() {
-        baguetteBox.run('.gallery', {
-            animation: 'fadeIn',
-            noScrollbars: true
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+    <script>
+        window.addEventListener('load', function() {
+            baguetteBox.run('.gallery', {
+                animation: 'fadeIn',
+                noScrollbars: true
+            });
         });
-   });
-</script>
+    </script>
 @endsection
 @section('css')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css">
 @endsection
