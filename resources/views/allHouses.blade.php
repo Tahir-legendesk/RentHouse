@@ -93,20 +93,20 @@
                             <select id="area" name="area" onchange="filter()">
                                 <option selected disabled>Locations</option>
                                 @foreach ($area as $item)
-                                    <option @if ($item->name == $request->area) selected @endif value="{{$item->name}}">
+                                    <option @if ($item->id == $request->area) selected @endif value="{{ $item->id }}">
                                         {{ $item->name }}</option>
                                 @endforeach
                             </select>
                             <i class="fas fa-map-marker-plus"></i>
                         </div>
                         <div class="select_arrow">
-                            <select name="price" id="price" onchange="filter()">
+                            <select name="price[]" id="price" onchange="filter()">
                                 <option selected disabled>Price</option>
-                                <option value="$0.00 to $1,000">$0.00 to $1,000</option>
-                                <option value="$2,000 to $3,000">$2,000 to $3,000</option>
-                                <option value="$4,000 to $5,000">$4,000 to $5,000</option>
-                                <option value="$6,000 to $7,000">$6,000 to $7,000</option>
-                                <option value="$8,000 to $9,000">$8,000 to $9,000</option>
+                                <option value="0, 1000" @if($request->price == "0, 1000") selected @endif>$0.00 to $1,000</option>
+                                <option value="2000, 3000" @if($request->price == "2000, 3000") selected @endif>$2,000 to $3,000</option>
+                                <option value="4000, 5000" @if($request->price == "4000, 5000") selected @endif>$4,000 to $5,000</option>
+                                <option value="6000, 7000" @if($request->price == "6000, 7000") selected @endif>$6,000 to $7,000</option>
+                                <option value="8000, 9000" @if($request->price == "8000, 9000") selected @endif>$8,000 to $9,000</option>
                             </select>
                             <i class="fas fa-money-check-alt"></i>
                         </div>
@@ -115,9 +115,10 @@
                                 <option selected disabled>Beds</option>
                                 <option value="1 to 5">1 to 5</option>
                                 {{-- <option value="6 to 10">Option 2</option>
-                            <option value="11 to 20">Option 3</option>
-                            <option>Option 4</option>
-                            <option>Option 5</option> --}}
+                                    <option value="11 to 20">Option 3</option>
+                                    <option>Option 4</option>
+                                    <option>Option 5</option> 
+                                --}}
                             </select>
                             <i class="fas fa-bed"></i>
                         </div>
@@ -134,14 +135,12 @@
                         </div>
                     </div>
                     <div class="row gy-5">
-
                         @foreach ($houses as $house)
                             <div class="col-sm-6 col-md-4">
                                 <div class="prod_col wow fadeInUp" data-wow-delay="0.15s">
                                     <div class="prod_img">
                                         <a href="house-details.php">
-                                            <img src="assets/images/pop1.jpg" alt="" class="img-fluid"
-                                                loading="lazy">
+                                            <img src="{{asset('images/'.$house->featured_image)}}" alt="" class="img-fluid" loading="lazy">
                                         </a>
                                         <a href="" class="fav_btn"><i class="fas fa-heart"></i></a>
                                         <div class="prop_tags">
@@ -151,30 +150,29 @@
                                     </div>
                                     <div class="prod_txt">
                                         <div class="prod_pricing">
-                                            $ 220,00
+                                            $ {{$house->rent}}
                                             <small>per month</small>
                                         </div>
-                                        <h3><a href="house-details.php">Apartment MBS</a></h3>
-                                        <p>Perum MBS, No 113 Condong Catur, Sleman Yogyakarta..</p>
+                                        <h3><a href="house-details.php">{{$house->name}}</a></h3>
+                                        <p>{{$house->address}}</p>
                                         <ul>
                                             <li>
                                                 <i class="fas fa-bed me-2"></i>
-                                                2 Bd
+                                                {{$house->number_of_room}} Bd
                                             </li>
                                             <li>
                                                 <i class="fas fa-bath me-2"></i>
-                                                1 Bd
+                                                {{$house->number_of_toilet}} Bath
                                             </li>
                                             <li>
                                                 <i class="fas fa-square-full me-2"></i>
-                                                726sqft
+                                                {{$house->dimension}}sqft
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-
                     </div>
                 </form>
             </div>
@@ -193,22 +191,23 @@
             var baths = $('#baths').val();
             var sqft = $('#sqft').val();
 
-            if(area != null || price != null || beds != null || baths != null || sqft != null){
-            // $.ajax({
-            //     url: '/filterhouse',
-            //     type: 'get',
-            //     data:  form,
-            //     cache: false,
-            //     contentType: false, //must, tell jQuery not to process the data
-            //     processData: false,
+            if (area != null || price != null || beds != null || baths != null || sqft != null) {
+                // $.ajax({
+                //     url: '/filterhouse',
+                //     type: 'get',
+                //     data:  form,
+                //     cache: false,
+                //     contentType: false, //must, tell jQuery not to process the data
+                //     processData: false,
 
-            //     success: function(response) {
+                //     success: function(response) {
 
-            //         console.log(response);
+                //         console.log(response);
 
-            //     }
-            // });
-                window.location = '/all-available/houses?area='+area+'&&price='+price+'&&beds='+beds+'&&baths='+baths+'&&sqft='+sqft+'  ';
+                //     }
+                // });
+                window.location = '/all-available/houses?area=' + area + '&&price=' + price + '&&beds=' + beds +
+                    '&&baths=' + baths + '&&sqft=' + sqft + '  ';
             }
 
         }

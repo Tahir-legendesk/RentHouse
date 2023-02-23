@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Area;
+use App\ATV;
 use App\Booking;
+use App\Contact;
 use App\House;
+use App\Subscribe;
 use App\User;
 use Illuminate\Http\Request;
-use App\Subscribe;
-use App\Contact;
-use App\ATV;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -36,12 +36,13 @@ class HomeController extends Controller
         return view('welcome', compact('houses', 'areas'));
     }
 
-    public function subscribe(Request $request){
+    public function subscribe(Request $request)
+    {
         $subscribe = new Subscribe;
         $subscribe->email = $request->email;
         $subscribe->save();
         return response()->json([
-            'message' => 'success'
+            'message' => 'success',
         ]);
     }
 
@@ -67,41 +68,47 @@ class HomeController extends Controller
 
     public function allHouses(Request $request)
     {
+        // dd($request->all());
+        $str = str_replace(',', '', $request->price);
+        $explode_price = explode(' ', $str);
+
+        $beds_str = str_replace(',', '', $request->beds);
+        $explode_room = explode(' ', $beds_str);
+
+        // dd($explode_room);
+
+        $baths_str = str_replace(',', '', $request->baths);
+        $explode_baths = explode(' ', $baths_str);
+
         $houses = House::where('status', 1);
         // return view('allHouses', compact('houses'));
         $area = $request->area;
-        $price = $request->price;
-        $beds = $request->beds;
-        $baths = $request->baths;
-        $sqft = $request->sqft;
-  
-        if ($request->location != null) {
-            $houses = $houses->whereHas('area', function ($q) use ($area) {
-                $q->where('name', 'LIKE', "%$area%");
-            });
-        }
-        if($request->houses){
-            // dd('sss');
-        }
-        
-        if($request->price != null){
-            //  dd(
-            
-        } 
-        
-        if($request->beds){
 
+        if ($request->has('area') != "null" && $request->area) {
+
+            $houses = $houses->where('area_id', $request->area);
         }
 
-        if($request->baths){
-
+        if ($request->has('price') && $request->price != "null") {
+            $houses = $houses->whereBetween('rent', [$explode_price[0], $explode_price[1]]);
         }
 
-        if($request->sqft){
+        if ($request->has('beds') && $request->beds != "null") {
 
-        }   
-        $houses = $houses->paginate(12);
-        return view('allHouses',get_defined_vars());
+            $houses = $houses->whereBetween('number_of_room', [$explode_room[0], $explode_room[1]]);
+        }
+
+        if ($request->has('baths') && $request->baths != "null") {
+
+            $houses = $houses->whereBetween('number_of_toilet', [$explode_baths[0], $explode_baths[1]]);
+        }
+
+        if ($request->has('sqft') && $request->sqft != "null") {
+            $houses = $houses->where('dimension', '=>', $request->sqft);
+        }
+        // dd($houses->get());
+        $houses = $houses->get();
+        return view('allHouses', get_defined_vars());
     }
 
     public function areaWiseShow($id)
@@ -209,8 +216,8 @@ class HomeController extends Controller
 
     public function atvRental()
     {
-        $atvs = ATV::where('is_active',1)->get();
-        return view('atv',get_defined_vars());
+        $atvs = ATV::where('is_active', 1)->get();
+        return view('atv', get_defined_vars());
     }
 
     public function contact()
@@ -218,7 +225,8 @@ class HomeController extends Controller
         return view('contact-us');
     }
 
-    public function contactUs(Request $request){
+    public function contactUs(Request $request)
+    {
 
         $contact = new Contact;
         $contact->name = $request->name;
@@ -226,10 +234,11 @@ class HomeController extends Controller
         $contact->phone = $request->phone;
         $contact->message = $request->message;
         $contact->save();
-        return redirect()->back()->with('message','Thanks for contacting us. we\'ll reach you as soon as possible.');
+        return redirect()->back()->with('message', 'Thanks for contacting us. we\'ll reach you as soon as possible.');
     }
 
-    public function filterhouse(Request $request){
+    public function filterhouse(Request $request)
+    {
         dd($request->all());
     }
 
