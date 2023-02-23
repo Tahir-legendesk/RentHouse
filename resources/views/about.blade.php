@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 has_mt text-center wow fadeInUp" data-wow-delay="0.15s">
+                    <div class="col-md-12 has_mt text-center wow fadeInUp" data-wow-delay="0.15s">
                         <div class="img_wrap">
                             <img src="assets/images/rent-a-house.jpg" alt="" class="img-fluid" loading="lazy">
                         </div>
@@ -55,7 +55,7 @@
                             eius </p>
                         <a href="{{route('house-all')}}" class=" theme-btn">View More</a>
                     </div>
-                    <div class="col-md-6 has_mt text-center wow fadeInUp" data-wow-delay="0.25s">
+                    {{-- <div class="col-md-6 has_mt text-center wow fadeInUp" data-wow-delay="0.25s">
                         <div class="img_wrap">
                             <img src="assets/images/rent-a-atvs.jpg" alt="" class="img-fluid" loading="lazy">
                         </div>
@@ -67,7 +67,7 @@
                             natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
                             ab illo inventore veritatis et quasi architecto beatae </p>
                         <a href="{{route('atv-rental')}}" class="theme-btn">View More</a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </section>

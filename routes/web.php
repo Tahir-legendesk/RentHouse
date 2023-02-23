@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('welcome');
 Route::get('/about', 'HomeController@about')->name('about');
-Route::get('/atv-rental', 'HomeController@atvRental')->name('atv-rental');
+Route::get('/atv-rental/{id}', 'HomeController@atvRental')->name('atv-rental');
 Route::get('/contact-us', 'HomeController@contact')->name('contact-us');
 Route::post('/contact', 'HomeController@contactUs')->name('contact');
 Route::post('/subscribe', 'HomeController@subscribe')->name('subscribe');
@@ -36,6 +36,8 @@ Route::get('/all-available/houses', 'HomeController@allHouses')->name('house-all
 Route::get('/available-houses/area/{id}', 'HomeController@areaWiseShow')->name('available.area.house');
 
 Route::post('/house-booking/id/{id}', 'HomeController@booking')->name('booking');
+Route::post('/renter/inquiry', 'HomeController@inquiry')->name('inquiry');
+
 
 Auth::routes(['verify' => true]);
 

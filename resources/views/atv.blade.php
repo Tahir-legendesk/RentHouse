@@ -27,13 +27,12 @@
                         commodi consequatur.</p>
                 </div>
                 <div class="row g-5">
-
                     @if ($atvs->count() > 0)
                         @foreach ($atvs as $atv)
                             <div class="col-md-6 wow fadeInUp" data-wow-delay="0.15s">
                                 <div class="atv_card">
                                     <div class="atv_img">
-                                        <img src="{{ asset('images/'.$atv->main_image) }}" alt="" class="img-fluid">
+                                        <img src="{{ asset('assets/images/'.$atv->main_image) }}" alt="" class="img-fluid">
                                     </div>
                                     <h3>{{$atv->name}}</h3>
                                     <table>
@@ -57,12 +56,12 @@
                                     <p>{{$atv->description}} </p>
                                     <h4>This ATV must be shifted.</h4>
                                     <ul>
-                                        @foreach (json_decode($atv->price) as $price)
+                                        {{-- @foreach (json_decode($atv->price) as $price) --}}
                                             <li>
-                                                <small>{{$price->hour}} HRs</small>
-                                                ${{$price->price}}
+                                                {{-- <small>{{$price->hour}} HRs</small> --}}
+                                                ${{$atv->price}}
                                             </li> 
-                                        @endforeach
+                                        {{-- @endforeach --}}
                                     </ul>
                                     <p>{{$atv->sub_description}}</p>
                                     <div class="atv_rental">
