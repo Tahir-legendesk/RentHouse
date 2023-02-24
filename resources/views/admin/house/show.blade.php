@@ -16,7 +16,6 @@
                                 <a class="btn btn-danger" href="{{ route('admin.house.index') }}"> Back</a>
                             </div>
                         </div>
-
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -32,7 +31,7 @@
                                 </tr>
                                 <tr>
                                     <th>Owner</th>
-                                    <td>{{ $house->user->name }}</td>
+                                    <td>{{$house->user->name}}</td>
                                 </tr>
                                 <tr>
                                     <th>Contact</th>

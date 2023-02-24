@@ -22,9 +22,6 @@ Route::post('/contact', 'HomeController@contactUs')->name('contact');
 Route::post('/subscribe', 'HomeController@subscribe')->name('subscribe');
 Route::get('/filterhouse', 'HomeController@filterhouse')->name('filterhouse');
 
-
-
-
 Route::get('/descending-order-houses-price', 'HomeController@highToLow')->name('highToLow');
 Route::get('/ascending-order-houses-price', 'HomeController@lowToHigh')->name('lowToHigh');
 
@@ -34,10 +31,11 @@ Route::get('/search-result-by-range', 'HomeController@searchByRange')->name('sea
 Route::get('/houses/details/{id}', 'HomeController@details')->name('house.details');
 Route::get('/all-available/houses', 'HomeController@allHouses')->name('house-all');
 Route::get('/available-houses/area/{id}', 'HomeController@areaWiseShow')->name('available.area.house');
+Route::get('billing', 'HomeController@billing')->name('billing');
+Route::get('landlord-plans', 'HomeController@landlord_plans')->name('landlord_plans');
 
 Route::post('/house-booking/id/{id}', 'HomeController@booking')->name('booking');
 Route::post('/renter/inquiry', 'HomeController@inquiry')->name('inquiry');
-
 
 Auth::routes(['verify' => true]);
 
@@ -45,9 +43,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('auth/google', 'Auth\GoogleController@redirectToGoogle');
 
 Route::get('auth/google/callback', 'Auth\GoogleController@handleGoogleCallback');
-
 //admin
-
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin', 'verified']],
     function () {
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
@@ -70,11 +66,14 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 
         Route::get('atv-list', 'AtvController@atv_show')->name('atv.list');
         Route::get('atv-create', 'AtvController@create')->name('atv.create');
+        Route::post('atv-store', 'AtvController@store')->name('atv.store');
+        Route::get('atv-edit/{id}', 'AtvController@edit')->name('atv.edit');
     });
 
 Route::group(['as' => 'landlord.', 'prefix' => 'landlord', 'namespace' => 'Landlord', 'middleware' => ['auth', 'landlord', 'verified']],
     function () {
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+        Route::get('plans', 'DashboardController@plans')->name('plans');
 
         Route::resource('area', 'AreaController');
         Route::resource('house', 'HouseController');

@@ -34,9 +34,9 @@
                                         <tr>
                                             <td>{{ $all_atv->name }}</td>
                                             {{-- <td>{{ $house->created_at->toFormattedDateString() }}</td> --}}
-                                            <td><img src="{{ asset('images/' . $atv->main_image) }}"
+                                            <td><img src="{{ asset('images/' . $all_atv->main_image) }}"
                                                     alt="{{ $all_atv->name }}" srcset="" style="width: 50px;"></td>
-                                            <td>{{ $house->number_of_room }}</td>
+                                            <td>{{ $all_atv->total_passenger }}</td>
                                             <td>
                                                 @if ($all_atv->is_active == 1)
                                                     Available
@@ -45,7 +45,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.house.show', $all_atv->id) }}"
+                                                <a href="{{ route('admin.atv.edit', $all_atv->id) }}"
                                                     class="btn btn-success m-2">Details</a>
                                                 <button class="btn btn-danger m-2" type="button"
                                                     onclick="deleteHouse({{ $all_atv->id }})">

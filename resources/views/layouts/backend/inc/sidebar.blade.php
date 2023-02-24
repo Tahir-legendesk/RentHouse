@@ -129,6 +129,14 @@
           </a>
         </li>
 
+        <li class="nav-item has-treeview">
+          <a href="{{ route('landlord_plans') }}"
+            class="nav-link">
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+            <p class="pl-2">Pricing</p>
+          </a>
+        </li>
+
 
         <li class="nav-item has-treeview">
           <a href="{{ route('landlord.area.index') }}"

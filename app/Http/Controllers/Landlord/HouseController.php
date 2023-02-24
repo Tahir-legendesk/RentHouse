@@ -25,6 +25,8 @@ class HouseController extends Controller
         return view('landlord.house.index', get_defined_vars());
     }
 
+
+
     /**
      * Show the form for creating a new resource.
      *
