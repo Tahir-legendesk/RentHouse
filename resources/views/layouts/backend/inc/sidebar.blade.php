@@ -14,9 +14,10 @@
           src="{{  Auth::user()->image != null ? asset('storage/profile_photo/'. Auth::user()->image) : asset('backend/img/user2-160x160.jpg') }}"
           style="height: 100px; width: 100px" class="img-circle elevation-2" alt="User Image">
         <br>
-        <div style="color: honeydew;line-height: 4px; font-weight: 600" class="text-center mt-3 info">
-          <p>Name: {{ Auth::user()->name }}</p>
-          <p>Email: {{ Auth::user()->email }}</p>
+        <div style="color: honeydew;line-height: 4px; font-weight: 500" class="text-center mt-3 info">
+          <p>{{ Auth::user()->name }}</p>
+          <p>{{ Auth::user()->email }}</p>
+          <p>{{ Auth::user()->role->name }}</p>
         </div>
       </div>
     </div>
