@@ -36,6 +36,14 @@ class HomeController extends Controller
         return view('welcome', compact('houses', 'areas'));
     }
 
+    public function landlord_plans(){
+        return view('landlord.plans');
+    }
+
+    public function billing(){
+        return view('billing');
+    }
+
     public function subscribe(Request $request)
     {
         $subscribe = new Subscribe;
@@ -237,10 +245,7 @@ class HomeController extends Controller
         return redirect()->back()->with('message', 'Thanks for contacting us. we\'ll reach you as soon as possible.');
     }
 
-    public function filterhouse(Request $request)
-    {
-        dd($request->all());
-    }
+ 
 
     public function inquiry(Request $request)
     {

@@ -25,6 +25,8 @@ class HouseController extends Controller
         return view('landlord.house.index', compact('houses', 'housecount'));
     }
 
+
+
     /**
      * Show the form for creating a new resource.
      *
