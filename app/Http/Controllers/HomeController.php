@@ -8,6 +8,7 @@ use App\Booking;
 use App\Contact;
 use App\House;
 use App\Inquiry;
+use App\Subscribe;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +47,7 @@ class HomeController extends Controller
 
     public function subscribe(Request $request)
     {
-        $subscribe = new Subscribe;
+        $subscribe = new Subscribe();
         $subscribe->email = $request->email;
         $subscribe->save();
         return response()->json([

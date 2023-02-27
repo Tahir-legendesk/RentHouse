@@ -7,12 +7,12 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             @include('partial.successMessage')
-
             <div class="card my-5 mx-4">
                 <div class="card-header">
                     <h3 class="card-title float-left"><strong>All ATV's ({{ $all_atvs->count() }})</strong></h3>
-                    <a href="{{ route('admin.atv.create') }}" class="btn btn-success btn-md float-right c-white">Add new ATV's
-                        <i class="fa fa-plus"></i></a>
+                    <a href="{{ route('landlord.atv.create') }}" class="btn btn-success btn-md float-right c-white">Add new ATV's
+                        <i class="fa fa-plus"></i>
+                    </a>
                 </div>
                 <!-- /.card-header -->
                 @if ($all_atvs->count() > 0)
@@ -45,19 +45,11 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.atv.edit', $all_atv->id) }}"
+                                                <a href="{{ route('landlord.atv.edit', $all_atv->id) }}"
                                                     class="btn btn-success m-2">Details</a>
-                                                <button class="btn btn-danger m-2" type="button"
-                                                    onclick="deleteHouse({{ $all_atv->id }})">
+                                                <a href="{{ route('landlord.atv.destroy', $all_atv->id) }}" class="btn btn-danger m-2" type="button" >
                                                     Delete
-                                                </button>
-
-                                                <form id="delete-form-{{ $all_atv->id }}"
-                                                    action="{{ route('admin.house.destroy', $all_atv->id) }}" method="POST"
-                                                    style="display: none;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                </form>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

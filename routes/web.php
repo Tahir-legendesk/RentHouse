@@ -65,9 +65,12 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
         Route::get('booked-houses-history', 'BookingController@historyList')->name('history.list');
 
         Route::get('atv-list', 'AtvController@atv_show')->name('atv.list');
-        Route::get('atv-create', 'AtvController@create')->name('atv.create');
-        Route::post('atv-store', 'AtvController@store')->name('atv.store');
-        Route::get('atv-edit/{id}', 'AtvController@edit')->name('atv.edit');
+        // Route::get('atv-create', 'AtvController@create')->name('atv.create');
+        // Route::post('atv-store', 'AtvController@store')->name('atv.store');
+        // Route::get('atv-edit/{id}', 'AtvController@edit')->name('atv.edit');
+        // Route::post('atv-update/{id}', 'AtvController@update')->name('atv.update');
+        Route::get('atv-destroy/{id}', 'AtvController@destroy')->name('atv.destroy');
+
     });
 
 Route::group(['as' => 'landlord.', 'prefix' => 'landlord', 'namespace' => 'Landlord', 'middleware' => ['auth', 'landlord', 'verified']],
@@ -90,6 +93,13 @@ Route::group(['as' => 'landlord.', 'prefix' => 'landlord', 'namespace' => 'Landl
         Route::get('profile-info', 'SettingsController@showProfile')->name('profile.show');
         Route::get('profile-info/edit/{id}', 'SettingsController@editProfile')->name('profile.edit');
         Route::post('profile-info/update/', 'SettingsController@updateProfile')->name('profile.update');
+
+        Route::get('atv-list', 'AtvController@atv_show')->name('atv.list');
+        Route::get('atv-create', 'AtvController@create')->name('atv.create');
+        Route::post('atv-store', 'AtvController@store')->name('atv.store');
+        Route::get('atv-edit/{id}', 'AtvController@edit')->name('atv.edit');
+        Route::post('atv-update/{id}', 'AtvController@update')->name('atv.update');
+        Route::get('atv-destroy/{id}', 'AtvController@destroy')->name('atv.destroy');
     });
 
 //renter

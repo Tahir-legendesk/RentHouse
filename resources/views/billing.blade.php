@@ -45,8 +45,6 @@
                 <div class="col-md-10 m-auto ">
                     <div class="main-billing">
                         <h2 class="text-center">BILLING CHECKOUT</h2>
-
-
                         <div class="row">
                             <div class="col-md-8">
                                 <form action="#">
@@ -102,7 +100,6 @@
                                     <div class="select-plan mb-3">
                                         <h3>Selected Plan</h3>
                                     </div>
-
                                     <div class="plan-feat-main">
                                         <div class="pf-box d-flex align-items-center justify-content-between mb-2">
                                             <div class="pf-title">

@@ -129,6 +129,16 @@
         </li>
 
         <li class="nav-item has-treeview">
+          <a href="{{ route('landlord.atv.list') }}"
+            class="nav-link {{ Request::is('landlord/atv-list') ? 'active' : '' }}">
+            <i class="fas fa-border-style"></i>
+            <p class="pl-2">
+              ATV's
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item has-treeview">
           <a href="{{ route('landlord_plans') }}"
             class="nav-link">
             <i class="fa fa-map-marker" aria-hidden="true"></i>
