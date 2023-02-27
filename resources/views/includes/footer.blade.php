@@ -6,9 +6,7 @@
  					<a href="/" class="logo">
 						<img src="/assets/images/logo.png" alt="" width="150">
  					</a>
- 					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. has been the
- 						industry's standard dummy text
- 						ever</p>
+ 					<p>The epitome of professional services and quality properties with top-notch amenities.</p>
  				</div>
  			</div>
  			<div class="col-md-6">

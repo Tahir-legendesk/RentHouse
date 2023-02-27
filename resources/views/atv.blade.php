@@ -79,7 +79,7 @@
 
                 </div>
             </div>
-            <div class="atv_features" style="background: transparent url(assets/images/atv-bg-flip.jpg);">
+            <div class="atv_features" style="background: transparent url(/assets/images/atv-bg-flip.jpg);">
                 <div class="container">
                     <ul>
                         <li>Helmet Free</li>

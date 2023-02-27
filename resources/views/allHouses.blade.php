@@ -139,8 +139,8 @@
                             <div class="col-sm-6 col-md-4">
                                 <div class="prod_col wow fadeInUp" data-wow-delay="0.15s">
                                     <div class="prod_img">
-                                        <a href="house-details.php">
-                                            <img src="{{asset('images/'.$house->featured_image)}}" alt="" class="img-fluid" loading="lazy">
+                                        <a href="{{route('house.details',$house->id)}}">
+                                            <img src="{{asset('storage/featured_house/'.$house->featured_image)}}" alt="" class="img-fluid" loading="lazy">
                                         </a>
                                         <a href="" class="fav_btn"><i class="fas fa-heart"></i></a>
                                         <div class="prop_tags">
