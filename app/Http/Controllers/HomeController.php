@@ -37,13 +37,7 @@ class HomeController extends Controller
         return view('welcome', compact('houses', 'areas'));
     }
 
-    public function landlord_plans(){
-        return view('landlord.plans');
-    }
 
-    public function billing(){
-        return view('billing');
-    }
 
     public function subscribe(Request $request)
     {
@@ -225,7 +219,8 @@ class HomeController extends Controller
 
     public function atvRental($id)    
     {
-        $atvs = ATV::where('is_active', 1)->get();
+        $atvs = ATV::where('is_active', 1)->where('house_id',$id)->get();
+        // dd($atvs);
         return view('atv', get_defined_vars());
     }
 

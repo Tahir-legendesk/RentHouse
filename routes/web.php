@@ -31,11 +31,16 @@ Route::get('/search-result-by-range', 'HomeController@searchByRange')->name('sea
 Route::get('/houses/details/{id}', 'HomeController@details')->name('house.details');
 Route::get('/all-available/houses', 'HomeController@allHouses')->name('house-all');
 Route::get('/available-houses/area/{id}', 'HomeController@areaWiseShow')->name('available.area.house');
-Route::get('billing', 'HomeController@billing')->name('billing');
-Route::get('landlord-plans', 'HomeController@landlord_plans')->name('landlord_plans');
 
 Route::post('/house-booking/id/{id}', 'HomeController@booking')->name('booking');
 Route::post('/renter/inquiry', 'HomeController@inquiry')->name('inquiry');
+
+Route::get('billing/{id}', 'MembershipController@billing')->name('billing');
+Route::get('landlord-plans', 'MembershipController@landlord_plans')->name('landlord_plans');
+
+Route::post('subscription-payment/{id}', 'PaymentController@payment_request')->name('payment_request');
+Route::get('successTransaction/{id}', 'PaymentController@successTransaction')->name('successTransaction');
+Route::get('cancelTransaction', 'PaymentController@cancelTransaction')->name('cancelTransaction');
 
 Auth::routes(['verify' => true]);
 
@@ -100,6 +105,8 @@ Route::group(['as' => 'landlord.', 'prefix' => 'landlord', 'namespace' => 'Landl
         Route::get('atv-edit/{id}', 'AtvController@edit')->name('atv.edit');
         Route::post('atv-update/{id}', 'AtvController@update')->name('atv.update');
         Route::get('atv-destroy/{id}', 'AtvController@destroy')->name('atv.destroy');
+
+
     });
 
 //renter

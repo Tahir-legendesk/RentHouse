@@ -447,6 +447,27 @@
     ),
     'log_channel' => NULL,
   ),
+  'paypal' => 
+  array (
+    'mode' => 'sandbox',
+    'sandbox' => 
+    array (
+      'client_id' => 'AUA4C2-Auh5XME2SeDu9UtjnSmUEGAF8HJbvi8YFHgP685zCpSBHelCTBnZMFZgoEkoNBgTG9g79xPMz',
+      'client_secret' => 'EFEdl_k9aWZvurRGk4ZYF1xfEAVigUBVHV9LSx1ZVP1guVVJKoOdLSWwxymSaKGa7kzXgbzz3UiohEuc',
+      'app_id' => 'APP-80W284485P519543T',
+    ),
+    'live' => 
+    array (
+      'client_id' => '',
+      'client_secret' => '',
+      'app_id' => '',
+    ),
+    'payment_action' => 'Sale',
+    'currency' => 'USD',
+    'notify_url' => '',
+    'locale' => 'en_US',
+    'validate_ssl' => true,
+  ),
   'queue' => 
   array (
     'default' => 'sync',

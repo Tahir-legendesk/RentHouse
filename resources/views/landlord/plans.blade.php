@@ -56,7 +56,7 @@
                             <ul class="price-feature">
                                 <li>$ 200.00</li>
                             </ul>
-                            <a href="/billing" class="theme-btn">Subscribe now</a>
+                            <a href="/billing/1" class="theme-btn">Subscribe now</a>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                             <ul class="price-feature">
                                 <li>$ 2200.00</li>
                             </ul>
-                            <a href="/billing" class="theme-btn">Subscribe now</a>
+                            <a href="/billing/2" class="theme-btn">Subscribe now</a>
                         </div>
                     </div>
                 </div>

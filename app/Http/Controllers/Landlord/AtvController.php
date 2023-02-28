@@ -24,7 +24,7 @@ class AtvController extends Controller
 
     public function store(Request $request)
     {
-        $Data = $request->all();
+        // $Data = $request->all();
         // dd($request->all(), $request->all(), $request->all());
         if ($request->hasFile('main_image')) {
             $attechment = $request->file('main_image');
@@ -67,7 +67,7 @@ class AtvController extends Controller
         
         $atv->save();
 
-        return redirect('/landlord/atv-list')->with('message','ATV\s Created Successfuly');
+        return redirect('/landlord/atv-list')->with('message','ATV\'s Created Successfuly');
     }
 
     public function edit(Request $request, $id)
@@ -75,19 +75,17 @@ class AtvController extends Controller
         $atv = ATV::where('id', $id)->first();
         return view('landlord.atvs.edit', get_defined_vars());
     }
-
-
+ 
     public function update(Request $request, $id){
+
         if ($request->hasFile('main_image')) {
             $attechment = $request->file('main_image');
             $img_2 = time() . $attechment->getClientOriginalName();
             $attechment->move(public_path('images'), $img_2);
-
         }else{
             $atv = ATV::where('id',$id)->first();
             $img_2 = $atv->main_image;
-        }
-      
+        } 
         ATV::where('id',$id)->update(array(
             'house_id' => $request->house_id,
             'min_age' => $request->min_age,
