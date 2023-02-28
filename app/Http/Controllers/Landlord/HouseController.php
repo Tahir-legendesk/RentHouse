@@ -75,20 +75,26 @@ class HouseController extends Controller
         ]);
 
         //handle featured image
-        $featured_image = $request->file('featured_image');
-        if ($featured_image) {
-            // Make Unique Name for Image
-            $currentDate = Carbon::now()->toDateString();
-            $featured_image_name = $currentDate . '-' . uniqid() . '.' . $featured_image->getClientOriginalExtension();
+        // $featured_image = $request->file('featured_image');
+        // if ($featured_image) {
+        //     // Make Unique Name for Image
+        //     $currentDate = Carbon::now()->toDateString();
+        //     $featured_image_name = $currentDate . '-' . uniqid() . '.' . $featured_image->getClientOriginalExtension();
 
-            // Check Dir is exists
-            if (!Storage::disk('public')->exists('featured_house')) {
-                Storage::disk('public')->makeDirectory('featured_house');
-            }
+        //     // Check Dir is exists
+        //     if (!Storage::disk('public')->exists('featured_house')) {
+        //         Storage::disk('public')->makeDirectory('featured_house');
+        //     }
 
-            // Resize Image  and upload
-            $cropImage = Image::make($featured_image)->resize(400, 300)->stream();
-            Storage::disk('public')->put('featured_house/' . $featured_image_name, $cropImage);
+        //     // Resize Image  and upload
+        //     $cropImage = Image::make($featured_image)->resize(400, 300)->stream();
+        //     Storage::disk('public')->put('featured_house/' . $featured_image_name, $cropImage);
+        // }
+        if ($request->hasfile('featured_image')) {
+            $featured_image = $request->file('featured_image');
+            $name = time() . '-' . uniqid() . '.' . $featured_image->extension();
+            $featured_image->move(public_path() . '/images/', $name);
+            // $data = $name;
         }
 
         if ($request->hasfile('images')) {
@@ -119,7 +125,7 @@ class HouseController extends Controller
         $house->atv_available = $request->atv_available;
         $house->description = $request->description;
         $house->images = json_encode($data);
-        $house->featured_image = $featured_image_name;
+        $house->featured_image = $name;
         $house->save();
         return redirect(route('landlord.house.index'))->with('success', 'House Added successfully');
     }
